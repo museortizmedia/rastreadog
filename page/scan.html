@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <title>RastreaDog | LOGIN</title>
+  <link rel="icon" type="image/png" href="../image/icon/ronnie.png"/>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@700&display=swap" rel="stylesheet">
+  
+<script src="https://unpkg.com/html5-qrcode"></script>
+
+</head>
+<body id="body" class="bg-light">
+    <nav class="navbar shadow navbar-expand-sm bg-dark navbar-light bg-white" style="height:13vh;z-index: 9999;">
+    <div class="container text-dark">
+
+    <img src="../image/logo/isotipo.png" style="width:70px;cursor: pointer;" onclick="window.open('../index.html','_self')">
+        <div class="nav-text d-none d-sm-block p-3" id="NavUsername" style="font-family: 'Baloo 2', cursive;font-size: 35px;color:#004040">RegistraD<span style="color:#fc9436">O</span>G</div>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar"><span class="navbar-toggler-icon"></span></button>
+
+
+
+        <div class="collapse navbar-collapse justify-content-end" id="collapsibleNavbar">
+            <ul class="navbar-nav p-3">
+                <li class="nav-item">
+                    <a class="nav-link text-dark" href="../index.html" data-toggle="tooltip" title="Volver al Inicio"><i class="fa fa-home" aria-hidden="true"></i> Volver</a>
+                </li>
+            </ul>
+        </div>
+</div>
+</nav>
+    
+<div id="inicio" class="d-flex justify-content-center bg-light align-items-center mt-5">
+<div class="d-flex flex-column rounded bg-white shadow text-center p-5 mt-4 col-lg-6 col-md-8 col-sm-10 col-11">
+<p class="h5 text-left">Escanea o sube el código.</p>
+<div id="qr-reader" style="width:100%" class="mx-auto m-2"></div>
+<p class="h5 text-left mt-5">Escribe el número de placa de la mascota.</p>
+<div class="input-group row m-2">
+  <input id="placa-text" type="text" class="form-control text-center text-warning" placeholder="A-123456" maxlength="8" >
+  <button type="button" class="btn btn-warning text-white ml-5" onclick="escanerPlacaText(document.getElementById('placa-text').value)">Buscar Placa</button>
+</div>
+<div id="qr-reader-results"></div>
+ 
+ </div>
+</div>
+
+
+
+
+<!-- profile -->
+<div id="profile" class="container-fluid bg-transparent text-center d-none">
+  <img id="profile-img" src="" class="rounded-circle img-fluid" alt="" width="200" height="200" style="position:relative;top: 100px; left: 0;">
+<div class="container shadow bg-white mt-5 pt-5" style="border-radius:30px 30px 0 0;">
+<div class="col-10 mx-auto">
+  <h2 id="profile-pet-name" class="text-left">Nombre</h2>
+  <p class="text-left"><i class="fa fa-map-marker fa-lg text-primary" aria-hidden="true"></i><span id="profile-location"> Local</span></p>
+  
+  <div class="card-deck">
+  <div class="card" onmouseover="this.classList.add('bg-light')" onmouseout="this.classList.remove('bg-light')">
+    <div class="card-body text-center">
+    <i class="fa fa-venus-mars" aria-hidden="true"></i>
+      <p id="profile-genero" class="card-text">macho</p>
+    </div>
+  </div>
+  <div class="card" onmouseover="this.classList.add('bg-light')" onmouseout="this.classList.remove('bg-light')">
+    <div class="card-body text-center">
+    <i class="fa fa-calendar-o" aria-hidden="true"></i>
+      <p id="profile-edad" class="card-text">2 años</p>
+    </div>
+  </div>
+  <div class="card" onmouseover="this.classList.add('bg-light')" onmouseout="this.classList.remove('bg-light')">
+    <div class="card-body text-center">
+    <i class="fa fa-paw" aria-hidden="true"></i>
+      <p id="profile-raza" class="card-text">Sabueso</p>
+    </div>
+  </div>
+</div>
+
+  
+  <p class="mt-3 text-muted"><small>La siguiente información corresponde al dueño registrado de esta mascota</small></p>
+
+<table class="table table-responsive-sm table-hover">
+    <thead>
+      <tr>
+        <th>Dueño/a</th>
+        <th >Correo</th>
+        <th>Teléfono</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td id="profile-dueno-nombre">John Dalton</td>
+        <td id="profile-dueno-correo">john@example.com</td>
+        <td id="profile-dueno-telefono">3100254125</td>
+      </tr>
+    </tbody>
+</table>
+
+<p class="h4 text-left p-3">Info de contacto</p>
+
+<div class="card-deck mt-2 pb-5">
+  <div class="card" onmouseover="this.classList.add('bg-light')" onmouseout="this.classList.remove('bg-light')">
+    
+    <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>Tipo</th>
+        <th>Info</th>
+      </tr>
+    </thead>
+    <tbody id="profile-contactos">
+      <!--<tr>
+        <td>Correo</td>
+        <td>john@example.com</td>
+      </tr>-->
+    </tbody>
+</table>
+    
+    </div>
+  </div>
+</div>
+
+
+
+</div>
+</div>
+
+<script type="text/javascript">
+let params = new URLSearchParams(document.location.search);
+let placa = params.get("placa");
+if(placa!=null){
+    InfoMascota(placa);
+}
+
+//var resultContainer = document.getElementById('qr-reader-results');
+var lastResult, countResults = 0;
+
+function onScanSuccess(decodedText, decodedResult) {
+    if (decodedText !== lastResult) {
+        ++countResults;
+        lastResult = decodedText;
+        // Handle on success condition with the decoded message.
+        console.log(`Scan result ${decodedText}`, decodedResult);
+        window.location.replace(window.location.protocol+"//"+window.location.hostname+window.location.pathname+"?placa="+decodedText.toString().split("placa=")[1]);
+    }
+}
+
+var html5QrcodeScanner = new Html5QrcodeScanner(
+    "qr-reader", { fps: 10, qrbox: 250 });
+html5QrcodeScanner.render(onScanSuccess);
+
+function InfoMascota(placa){
+    var info = httpGet("https://script.google.com/macros/s/AKfycbxJr7WjDsNpRdAEAQqBoMlXeiAj6mV6Zhozr0LU34XURDEb9GF3bVhUbJ94CeeqvS2p/exec?u=root&p=menealacola&func="+("select * from mascotas where placa="+placa).replaceAll(" ","%20"));
+    if(info[0]=="200")
+    {
+        info = info[1].toString().split(",");
+        var razainfo = httpGet("https://script.google.com/macros/s/AKfycbxJr7WjDsNpRdAEAQqBoMlXeiAj6mV6Zhozr0LU34XURDEb9GF3bVhUbJ94CeeqvS2p/exec?u=root&p=menealacola&func="+("select * from razas where consecutivo="+info[11]).replaceAll(" ","%20"));
+        if(razainfo[0]=="200"){
+            razainfo=razainfo[1].toString().split(",");
+            var tipo = httpGet("https://script.google.com/macros/s/AKfycbxJr7WjDsNpRdAEAQqBoMlXeiAj6mV6Zhozr0LU34XURDEb9GF3bVhUbJ94CeeqvS2p/exec?u=root&p=menealacola&func="+("select (tipo) from tipos where consecutivo="+razainfo[3]).replaceAll(" ","%20"))[1];
+            if(tipo[0]=="200"){tipo=tipo[1].toString().split(",");}
+            var duenoinfo = httpGet("https://script.google.com/macros/s/AKfycbxJr7WjDsNpRdAEAQqBoMlXeiAj6mV6Zhozr0LU34XURDEb9GF3bVhUbJ94CeeqvS2p/exec?u=root&p=menealacola&func="+("select * from duenos where id="+info[10]).replaceAll(" ","%20"));
+            if(duenoinfo[0]="200"){duenoinfo=duenoinfo[1].toString().split(",");}
+            //visual
+            document.getElementById('body').classList.remove('bg-light');
+            document.getElementById('body').classList.add('bg-warning');
+            //mostrar datos
+            document.getElementById('inicio').classList.remove('d-flex');
+            document.getElementById('inicio').classList.add('d-none');
+            document.getElementById('profile').classList.remove('d-none');
+            //rellenar datos
+            document.getElementById('profile-img').src = razainfo[4];
+            document.getElementById('profile-pet-name').innerHTML=info[1];
+            document.getElementById('profile-location').innerHTML=" "+duenoinfo[6].replaceAll("/hash/","#").replaceAll("-"," ")+" ";
+            document.getElementById('profile-genero').innerHTML=tipo+" "+info[6];
+            var edad = info[3]+info[4]; edad = edad.toString().split("-")[2]; 
+            edad = new Date().getFullYear().toString().slice(-2) - (info[2]+""+info[3]).split('T')[0].split('-')[2];
+
+            document.getElementById('profile-edad').innerHTML = edad+" años de edad";
+            document.getElementById('profile-raza').innerHTML = razainfo[1];
+            document.getElementById('profile-dueno-nombre').innerHTML = duenoinfo[0].replaceAll("-"," ")+" "+duenoinfo[1].replaceAll("-"," ");
+            document.getElementById('profile-dueno-correo').innerHTML = duenoinfo[7];
+            document.getElementById('profile-dueno-telefono').innerHTML = duenoinfo[4];
+            //document.getElementById('profile-contactos')
+            var solicitudcont = httpGet("https://script.google.com/macros/s/AKfycbxJr7WjDsNpRdAEAQqBoMlXeiAj6mV6Zhozr0LU34XURDEb9GF3bVhUbJ94CeeqvS2p/exec?u=root&p=menealacola&func="+("select * from contactos where id="+u_id).replaceAll(" ","%20"));
+                if(solicitudcont[0]="200")
+                {
+                    document.getElementById('profile-contactos').innerHTML="";
+                    for (var i = 0; i < data.length; i++) {
+                        //mostrar contactos
+                    /*var row = data[i].toString().split(",");
+                    var k = window.localStorage.getItem('u_id')+row[1].replaceAll("/space/"," ")+row[2].replaceAll("/space/"," ");
+                    document.getElementById('profile-contactos').innerHTML += "<tr><td>"+row[1].replaceAll("/space/"," ")+"</td><td>"+row[2].replaceAll("/space/"," ")+"</td><td>"+"<button type='button' class='close' onclick='eliminar_contacto(\""+k+"\")'>&times;</button>"+"</td></tr>";*/
+                }
+            }
+
+            }
+        
+        
+    }else{
+        console.log('placa inexistente');
+        document.getElementById('qr-reader').classList.remove("d-none");
+        document.getElementById('qr-reader-results').innerHTML = "<b class='text-danger'>no se encontró la placa. Inténtalo nuévamente</b>";
+    }
+    
+}
+function escanerPlacaText(placa) {
+    // confirmar la placa
+    //mostrar la placa
+    InfoMascota(placa);
+
+}
+    function httpGet(theUrl)
+    {
+        var xmlHttp = new XMLHttpRequest();
+        xmlHttp.open( "GET", theUrl, false );
+        xmlHttp.send( null );
+        var respuesta=xmlHttp.response;
+        const res = JSON.parse(respuesta.toString());
+        return res;
+    }
+</script>
+
+</body>
+</html>

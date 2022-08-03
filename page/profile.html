@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <title>RastreaDog | TU PERFIL</title>
+  <link rel="icon" type="image/png" href="../image/icon/ronnie.png"/>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@700&display=swap" rel="stylesheet">
+</head>
+<body class="bg-light" onload="iniciar_profile()">
+
+<nav class="navbar shadow navbar-expand-sm bg-dark navbar-light bg-white" style="height:13vh;z-index: 9999;">
+    <div class="container text-dark">
+
+    <img src="../image/logo/isotipo.png" style="width:70px;cursor: pointer;" onclick="window.open('../index.html','_self')">
+        <div class="nav-text d-none d-sm-block p-3" id="NavUsername" style="font-family: 'Baloo 2', cursive;font-size: 35px;color:#004040">RegistraD<span style="color:#fc9436">O</span>G</div>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar"><span class="navbar-toggler-icon"></span></button>
+
+
+
+        <div class="collapse navbar-collapse justify-content-end" id="collapsibleNavbar">
+            <ul class="navbar-nav p-3">
+                <li class="nav-item">
+                    <a class="nav-link text-dark" href="../index.html" data-toggle="tooltip" title="Volver al Inicio"><i class="fa fa-home" aria-hidden="true"></i> Volver</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link text-dark" href="#" onclick="BTN_cerrar_sesion()" data-toggle="tooltip" title="Cerrar Sesión"><i class="fa fa-sign-out" aria-hidden="true"></i> Cerrar Sesión</a>
+                </li>
+            </ul>
+        </div>
+</div>
+</nav>
+
+<style type="text/css">
+    .custom-select,
+    .form-control{
+        background-color: rgba(255, 255, 255, 0.18)!important;
+        border-radius: 25px!important;
+        border-style: none;
+        color: white!important;
+    }
+    ::placeholder {
+        color: rgba(255,255,255,0.5)!important;
+    }
+    form .btn{
+        color: #f0ad4e!important;
+    }
+    .custom-select{color: dimgrey!important;}
+    .btn {border-radius: 25px!important;}
+</style>
+
+<div id="msj" class="container-fluid p-5 text-center text-muted">cargando perfil...</div>
+<div class="d-block d-sm-none" style="height: 50vh"></div>
+<div class="d-flex justify-content-center bg-light align-items-center" style="height: 130vh">
+<div id="content" class="row col-11 mx-auto justify-content-between mt-5 text-white d-none">
+    <div id="profile" class="shadow mx-auto text-center col-12 col-lg-5 m-3 p-5" style="background: rgb(234,166,23); background: linear-gradient(152deg, rgba(234,166,23,1) 0%, rgba(228,141,14,1) 100%, rgba(253,191,90,1) 100%);border-radius: 25px;">
+
+<form>
+    <p class="h3 text-white"><span style="font-family: 'Baloo 2', cursive">TU PERFIL</span></p>
+    <p class="text-white mb-5">Este es tu perfil. Modifica los campos, guarda los cambios y míralos en la placa de tu peludito.</p>
+
+    <div class="input-group-md mb-3">
+      <input type="text" class="form-control shadow" id="d_nombre" placeholder="Escribe tus nombres" onchange="alcambiar()" autocomplete="off">
+    </div>
+
+    <div class="input-group-md mb-3">
+      <input type="text" class="form-control shadow" id="d_apellido" placeholder="Escribe tus apellidos" onchange="alcambiar()" autocomplete="off">
+    </div>
+
+    <div class="input-group-md row mb-3">
+    <div class="col-5">
+      <select id="tipo_id" class="custom-select" onchange="alcambiar();">
+        <option value="CC">Cédula de Ciudadania</option>
+        <option value="TI">Tarjeta de Identidad</option>
+        <option value="CE">Cédula de Extranjeria</option>
+        <option value="PS">Pasaporte</option>
+      </select>
+    </div>
+    <div class="col-7">
+    <input type="text" class="form-control shadow" id="d_n_id" placeholder="indentificación" onkeypress='return event.charCode >= 48 && event.charCode <= 57' onchange="alcambiar()" autocomplete="off">
+    </div>
+    </div>
+
+  <div class="input-group-md mb-3">
+      <input type="text" class="form-control shadow" id="d_telefono" placeholder="teléfono" onkeypress='return event.charCode >= 48 && event.charCode <= 57' onchange="alcambiar()" autocomplete="off">
+  </div>
+
+ <div class="input-group-md mb-3">
+      <input type="text" class="form-control shadow" id="d_recoverymail" placeholder="correo de recuperación (opcional)" onchange="alcambiar()" autocomplete="off">
+  </div>
+
+  <div class="input-group-md mb-3">
+      <input type="text" class="form-control shadow" id="d_direccion" placeholder="dirección (opcional)" onchange="alcambiar()" autocomplete="off">
+  </div>
+
+  <div class="input-group-md mb-3 row">
+
+    <div class="col">
+      <select data-toggle="tooltip" title="Escoge un país" id="pais" class="custom-select" onchange="alcambiar();
+      this.setAttribute('title',$('#pais option:selected').text());
+      var i = this.value;
+      if(i!=null){rellenar_dep(i);}">
+        <option value="">País</option>
+      </select>
+    </div>
+
+    <div class="col ml-1">
+      <select data-toggle="tooltip" title="Escoge un departamento" id="depto" class="custom-select" onchange="alcambiar();
+      this.setAttribute('title',$('#depto option:selected').text());
+      var i = this.value;
+      if(i!=null){rellenar_barrio(i);}">
+        <option value="">Depto</option>
+
+      </select>
+    </div>
+
+    <div class="col ml-1">
+      <select data-toggle="tooltip" title="Escoge tu corregimiento o barrio" id="barrio" class="custom-select" onchange="alcambiar();
+      this.setAttribute('title',$('#barrio option:selected').text());
+      ">
+        <option value="">Barrio</option>
+
+      </select>
+    </div>
+
+  </div>
+
+    <button id="subbtn" type="button" class="btn btn-lg btn-light btn-block disabled text-uppercase" onclick="if(!(this.classList.contains('disabled'))){BTN_guardar_perfil()}"><b><span style="font-family: 'Baloo 2', cursive">guardar cambios</span></b></button>
+
+    <p class="mt-3"><small>¿No tienes mascotas registradas? Hazlo <a style="color:#444" href="pet_admin.html">aquí</a></small></p>
+  </form>
+
+
+
+    </div>
+
+    <div id="info" class="shadow mx-auto text-center col-12 col-lg-5 m-3 p-5" style="background: rgb(234,166,23); background: linear-gradient(152deg, rgba(234,166,23,1) 0%, rgba(228,141,14,1) 100%, rgba(253,191,90,1) 100%);border-radius: 25px;">
+        <p class="h3 text-white"><span style="font-family: 'Baloo 2', cursive">DATOS DE CONTACTO ADICIONALES</span></p>
+        <p class="text-white mb-5"><small>Esta información aparecerá en la placa de todas tus mascotas</small></p>
+        <div class="input-group-md row mb-3">
+            <div class="col">
+              <select id="contacto_tipo" class="custom-select">
+                <option value="Correo">Correo</option>
+                <option value="Número Fijo">Número Fijo</option>
+                <option value="Número Celular">Número Celular</option>
+                <option value="Número Casa">Número Casa</option>
+                <option value="Número Trabajo">Número Trabajo</option>
+                <option value="Número Whatsapp">Número Whatsapp</option>
+              </select>
+            </div>
+    
+            <div class="col">
+                <input type="text" class="form-control shadow" id="contacto_info" placeholder="información de contacto" autocomplete="off">
+            </div>
+        </div>
+        <div class="input-group-md row mb-3">
+            <div class="col-7 mx-auto">
+                <button type="button" class="btn btn-block btn-light" onclick="anadircontacto()">Añadir</button>
+            </div>
+        </div>
+
+        <div class="input-group-md row mb-3">
+            <div class="col table-responsive-sm table-hover">
+            <table class="table table-sm text-white mx-auto">
+            <thead class="thead-light">
+              <tr>
+                <th>Tipo</th>
+                <th>Contenido</th>
+                <th>Opciones</th>
+              </tr>
+            </thead>
+            <tbody id="contacto_tabla">
+            </tbody>
+            </table>
+            </div>
+        </div>
+    </div> 
+</div>
+ 
+</div>
+<div class="d-block d-sm-none" style="height: 25vh"></div>
+
+<script>
+var cambios=false;
+    function alcambiar()
+    {
+        if(window.localStorage.getItem('virgen')=='true'){
+            if(document.getElementById('d_nombre').value!="" &&
+               document.getElementById('d_apellido').value!="" &&
+               document.getElementById('tipo_id').value!="" &&
+               document.getElementById('d_n_id').value!="" &&
+               document.getElementById('d_telefono').value!="" &&
+               document.getElementById('pais').value!="" &&
+               document.getElementById('depto').value!="" &&
+               document.getElementById('barrio').value!="" )
+            {
+                document.getElementById('subbtn').classList.remove('disabled');
+            }else{document.getElementById('subbtn').classList.add('disabled');}
+        }else{
+            cambios=true;
+            //alert(cambios);
+            document.getElementById('subbtn').classList.remove('disabled');
+        }
+    }
+    function iniciar_profile()
+    {
+        //intento de recoger sesión iniciada
+        var localStorade = window.localStorage;
+        var name = localStorage.getItem('nombre');
+        virgen = localStorage.getItem('virgen');
+        var pk = localStorage.getItem('u_correo');
+        var u_id = localStorade.getItem('u_id');
+        let url = "https://script.google.com/macros/s/AKfycbxJr7WjDsNpRdAEAQqBoMlXeiAj6mV6Zhozr0LU34XURDEb9GF3bVhUbJ94CeeqvS2p/exec?u=root&p=menealacola&func="
+        document.getElementById('msj').classList.add('d-none');
+        document.getElementById('content').classList.remove('d-none');
+
+        if(virgen=='true') //si es la primera vez solo crear perfil
+        {
+            //console.log('usuario nuevo');
+            document.getElementById('msj').classList.add('d-none');
+            document.getElementById('content').classList.remove('d-none');
+            //crear perfil primera vez
+            document.getElementById('info').classList.add('d-none');
+            document.getElementById('profile').classList.remove('col-lg-5');
+            //rellenar pais
+            actualizar_paises();
+
+        }else if( name!=null && (virgen==null||virgen=="false") )
+        {
+             //console.log('usuario viejo');
+             document.getElementById('NavUsername').innerHTML = name;
+             document.getElementById('NavUsername').classList.add("text-uppercase");
+             //traer la info del usuario
+             
+            var respuesta = httpGet(url+("select (nombres,apellidos,tipo_id,id,teléfono,correo_recuperacion,direccion,usuario_correo,localizacion) from duenos where usuario_correo="+pk).replaceAll(" ","%20"));
+            if(respuesta[0]==200)
+            {
+                var datos = respuesta[1].toString().replaceAll("-"," ").split(",");
+                var nombre_d = datos[0], apellido_d = datos[1];
+                //rellenar formulario
+                document.getElementById('d_nombre').value=datos[0];
+                document.getElementById('d_apellido').value=datos[1];
+                document.getElementById('tipo_id').value=datos[2];
+                document.getElementById('d_n_id').value=datos[3];
+                document.getElementById('d_telefono').value=datos[4];
+                if(datos[5].toString().split("|")[1]=="esperando confirmación")
+                {
+                    document.getElementById('d_recoverymail').value=datos[5].toString().split("|")[1];
+                    document.getElementById('d_recoverymail').setAttribute("style","color:#777!important;");
+                }else{
+                    document.getElementById('d_recoverymail').value=datos[5];
+                    
+                }
+                document.getElementById('d_direccion').value=datos[6].replaceAll("/hash/","#");
+                //rellenar pais
+                actualizar_paises();
+                
+
+                var bar_com = httpGet(url+("select * from barrio_comuna where consecutivo="+datos[8]));
+                if(bar_com[0]=="200"){bar_com=bar_com[1].toString().split(",");}
+
+                var dep_est = httpGet(url+("select * from dep_estado where consecutivo="+bar_com[4]));
+                if(dep_est[0]=="200"){dep_est=dep_est[1].toString().split(",");}
+
+                var pais = httpGet(url+("select * from países where consecutivo="+dep_est[3]));
+                if(pais[0]=="200"){pais=pais[1].toString().split(",");}
+                
+                document.getElementById('pais').value=pais[0]; rellenar_dep(pais[0]);
+                document.getElementById('depto').value=dep_est[0]; rellenar_barrio(dep_est[0]);
+                document.getElementById('barrio').value=bar_com[0];
+
+
+                //datos de contacto
+                var solicitudcont = httpGet(url+("select * from contactos where id="+u_id).replaceAll(" ","%20"));
+                if(solicitudcont[0]="200"){
+                    actualizar_tabla(solicitudcont[1]);
+                }else{ console.log('desconocido'+name+virgen+pk+" :redirecciona");
+                window.location.replace("../index.html"); }
+
+            }else if(respuesta[0]==500){localStorage.setItem('virgen',true); location.reload();}
+        }  
+    }
+    function actualizar_paises()
+    {
+        var datosloca = httpGet("https://script.google.com/macros/s/AKfycbxJr7WjDsNpRdAEAQqBoMlXeiAj6mV6Zhozr0LU34XURDEb9GF3bVhUbJ94CeeqvS2p/exec?u=root&p=menealacola&func="+("select * from países").replaceAll(" ","%20"));
+        document.getElementById("pais").innerHTML = '<option value="">Pais</option>';
+        if(datosloca[0]==200)
+        {
+            for (var i = 0; i <= datosloca[1].length-1; i++) {
+            var element = document.createElement("option");
+            element.setAttribute('value',datosloca[1][i][0]);
+            var text = document.createTextNode(datosloca[1][i][1]);
+            element.appendChild(text);
+            document.getElementById('pais').appendChild(element);
+            }
+        }
+    }
+    function anadircontacto()
+    {
+        var localStorade = window.localStorage;
+        var u_id = localStorade.getItem('u_id');
+        var tipo = document.getElementById('contacto_tipo').value.replaceAll(" ","/space/");
+        var info = document.getElementById('contacto_info').value.replaceAll(" ","/space/");
+        alert(info);
+        //verificar
+        if(info.length != 0)
+        {
+            let url = "https://script.google.com/macros/s/AKfycbxJr7WjDsNpRdAEAQqBoMlXeiAj6mV6Zhozr0LU34XURDEb9GF3bVhUbJ94CeeqvS2p/exec?u=root&p=menealacola&func=";
+            alert(url+("insert contactos (id,tipo_contacto,info_contacto) values ("+u_id+","+tipo+","+"'"+info+")").replaceAll(" ","%20"));
+            var solicitud = httpGet(url+("insert contactos (id,tipo_contacto,info_contacto) values ("+u_id+","+tipo+","+"'"+info+")").replaceAll(" ","%20"));
+            if(solicitud[0]="200"){
+                document.getElementById('contacto_info').value="";
+                var solicitudcont = httpGet(url+("select * from contactos where id="+u_id).replaceAll(" ","%20"));
+                if(solicitudcont[0]="200"){
+                    actualizar_tabla(solicitudcont[1]);
+                }
+            }
+        
+        }else{
+            alert('Debes rellenar la información de contacto');
+        }
+
+    }
+    function actualizar_tabla(data)
+    {
+        document.getElementById('contacto_tabla').innerHTML="";
+        for (var i = 0; i < data.length; i++) {
+            var row = data[i].toString().split(",");
+            var k = window.localStorage.getItem('u_id')+row[1].replaceAll("/space/"," ")+row[2].replaceAll("/space/"," ");
+            document.getElementById('contacto_tabla').innerHTML += "<tr><td>"+row[1].replaceAll("/space/"," ")+"</td><td>"+row[2].replaceAll("/space/"," ")+"</td><td>"+"<button type='button' class='close' onclick='eliminar_contacto(\""+k+"\")'>&times;</button>"+"</td></tr>";
+        }
+    }
+    function eliminar_contacto(key)
+    {
+        let url = "https://script.google.com/macros/s/AKfycbxJr7WjDsNpRdAEAQqBoMlXeiAj6mV6Zhozr0LU34XURDEb9GF3bVhUbJ94CeeqvS2p/exec?u=root&p=menealacola&func="
+        var eliminar = httpGet(url+("delete from contactos where key="+key).replaceAll(" ","%20"));
+        var solicitud = httpGet(url+("select * from contactos where id="+window.localStorage.getItem('u_id')).replaceAll(" ","%20"));
+            if(solicitud[0]="200"){
+                actualizar_tabla(solicitud[1]);
+            }
+    }
+    function rellenar_dep(pais)
+    {
+        document.getElementById("depto").innerHTML = '<option value="">Depto</option>';
+        let url = "https://script.google.com/macros/s/AKfycbxJr7WjDsNpRdAEAQqBoMlXeiAj6mV6Zhozr0LU34XURDEb9GF3bVhUbJ94CeeqvS2p/exec?u=root&p=menealacola&func="
+        var datosloca = httpGet(url+("select * from Dep_Estado where pais="+pais).replaceAll(" ","%20"));
+            if(datosloca[0]==200)
+            {
+                for (var i = 0; i <= datosloca[1].length-1; i++) {
+                var element = document.createElement("option");
+                element.setAttribute('value',datosloca[1][i][0]);
+                var text = document.createTextNode(datosloca[1][i][1]+datosloca[1][i][2]);
+                element.appendChild(text);
+                document.getElementById('depto').appendChild(element);
+                }
+            }
+    }
+    function rellenar_barrio(depto)
+    {
+        document.getElementById("barrio").innerHTML = '<option value="">Barrio</option>';
+        let url = "https://script.google.com/macros/s/AKfycbxJr7WjDsNpRdAEAQqBoMlXeiAj6mV6Zhozr0LU34XURDEb9GF3bVhUbJ94CeeqvS2p/exec?u=root&p=menealacola&func="
+        var datosloca = httpGet(url+("select * from Barrio_Comuna where dep_estado="+depto).replaceAll(" ","%20"));
+            if(datosloca[0]==200)
+            {
+                for (var i = 0; i <= datosloca[1].length-1; i++) {
+                var element = document.createElement("option");
+                element.setAttribute('value',datosloca[1][i][0]);
+                var text = document.createTextNode(datosloca[1][i][1]+" - "+datosloca[1][i][2]+" "+datosloca[1][i][3]);
+                element.appendChild(text);
+                document.getElementById('barrio').appendChild(element);
+                }
+            }
+    }
+    function BTN_cerrar_sesion()
+    {
+        var localStorade = window.localStorage;
+        localStorage.clear();
+        window.location.replace("../index.html");
+    }
+    function BTN_guardar_perfil()
+    {        
+        var localStorade = window.localStorage;
+        var pk = localStorade.getItem('u_correo');
+        var virgen = localStorade.getItem('virgen');
+        var name = localStorage.getItem('nombre');
+
+        //trae valores del formulario
+        var dname = document.getElementById('d_nombre').value;
+        var dlastname = document.getElementById('d_apellido').value;
+        var dtipoid = document.getElementById('tipo_id').value;
+        var did = document.getElementById('d_n_id').value;
+        var dtele = document.getElementById('d_telefono').value;
+        var drmail = document.getElementById('d_recoverymail').value;
+        var dndir = encodeURI(document.getElementById('d_direccion').value.replaceAll(" ","-").replaceAll("#","/hash/"));
+        var dloca = document.getElementById('barrio').value;
+
+        if(virgen=='true'){
+            //validar los valores obligatorios
+            if(dname==""||dlastname==""||dtipoid==""||did==""||dtele==""){alert('Para crear un perfil es obligatorio un nombre, apellido, tipo de id, número de id y teléfono'); return;}
+            //inserta valores en la bd
+            let url = "https://script.google.com/macros/s/AKfycbxJr7WjDsNpRdAEAQqBoMlXeiAj6mV6Zhozr0LU34XURDEb9GF3bVhUbJ94CeeqvS2p/exec?u=root&p=menealacola&func=insert%20duenos%20(nombres,apellidos,tipo_id,id,teléfono,correo_recuperacion,direccion,usuario_correo,localizacion)%20values%20(";
+            var bdvalues = dname+","+dlastname+","+dtipoid+","+did+","+dtele+","+drmail+","+dndir+","+pk+","+dloca+")";
+            bdvalues = bdvalues.replaceAll(" ", "-"); //remplazamos espacios por -
+            url+=bdvalues;
+            var respuesta = httpGet(url);
+            if(respuesta[0]=="200"){alert('Perfil agregado correctamente');location.reload();}
+            //actualizar estado en nube
+            localStorade.removeItem('virgen');
+            localStorage.setItem('nombre', dname.split(" ")[0]+" "+dlastname.split(" ")[0]);
+            localStorage.setItem('u_id', did);
+            window.location.replace("../index.html");
+
+        }else if(name!=null){
+            //actualiza valores en la bd
+            let url = "https://script.google.com/macros/s/AKfycbxJr7WjDsNpRdAEAQqBoMlXeiAj6mV6Zhozr0LU34XURDEb9GF3bVhUbJ94CeeqvS2p/exec?u=root&p=menealacola&func=update%20duenos%20set%20";
+            var bdvalues = "nombres="+dname+",apellidos="+dlastname+",tipo_id="+dtipoid+",id="+did+",teléfono="+dtele+",correo_recuperacion="+drmail;
+            if(drmail==""){
+                bdvalues+=",direccion="+dndir+",localizacion="+dloca+"%20where%20usuario_correo="+pk;
+            }else{
+                bdvalues+="|esperando-confirmación"+",direccion="+dndir+",localizacion="+dloca+"%20where%20usuario_correo="+pk;
+                //enviar correo para confirmar correo recuperacion
+                httpGet(url+"?mailactivate=0&mailrecover="+pk+"&id="+did);
+            }
+            bdvalues = bdvalues.toString().replaceAll(" ","-"); //remplazamos espacios por -
+            url+=bdvalues;
+            var respuesta = httpGet(url);
+            if(respuesta[0]=="200"){
+                
+                alert('Perfil actualizado con éxito');
+                location.reload();
+            }
+        }        
+    }
+    function httpGet(theUrl)
+    {
+        var xmlHttp = new XMLHttpRequest();
+        xmlHttp.open( "GET", theUrl, false );
+        xmlHttp.send( null );
+        var respuesta=xmlHttp.response;
+        const res = JSON.parse(respuesta.toString());
+        return res;
+    }
+</script>
+</body>
+</html>

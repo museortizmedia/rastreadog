@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="es" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>RastreaDog | INICIO</title>
+    
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="icon" type="image/png" href="image/icon/ronnie.png"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"/>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://drive.google.com/uc?export=download&id=1BW8li3k9H7Kloa8I2E1Yw-a-j7oSfEay"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@700&display=swap" rel="stylesheet">
+</head>
+<body class="bg-light" onload="iniciar();">
+
+<style type="text/css">
+    .text-body{
+        color:  #004040!important;
+    }
+    ::placeholder {
+        color: #f0ad4e!important;
+    }
+</style>
+
+<!--/ start-NAVBAR /-->
+<nav class="navbar shadow navbar-expand-lg bg-dark navbar-light bg-white" style="height:13vh;z-index: 9999;">
+    <div class="container text-dark">
+
+    <img src="image/logo/isotipo.png" style="width:70px;cursor: pointer;" onclick="window.open('index.html','_self')">
+        <div class="nav-text d-none d-sm-block p-3" id="NavUsername" style="font-family: 'Baloo 2', cursive;font-size: 27px;color:#004040">RegistraD<span style="color:#fc9436">O</span>G</div>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar"><span class="navbar-toggler-icon"></span></button>
+
+        <div class="collapse navbar-collapse justify-content-end" id="collapsibleNavbar">
+            <ul class="navbar-nav p-3">
+                <li class="nav-item LogReg_navBar">
+                    <a class="nav-link text-dark" href="page/register.html"><i class="fa fa-user" aria-hidden="true"></i> Registrarse</a>
+                </li>
+                <li class="nav-item LogReg_navBar">
+                    <a class="nav-link text-dark" href="page/login.html"><i class="fa fa-sign-in" aria-hidden="true"></i> Iniciar Sesión</a>
+                </li>                    
+                <li class="nav-item LogReg_navBar mr-3 my-auto d-none">
+                    <div class="dropdown dropleft float-sm-right">
+                        <button type="button" class="btn btn-warning text-white dropdown-toggle" data-toggle="dropdown">
+                              Escoge tu mascota
+                        </button>
+                        <div id="dpmenu_mascotas" class="dropdown-menu">
+                            <a class="dropdown-item text-muted" href="page/pet_admin.html">administrar tus mascotas</a>
+                        </div>
+                    </div>
+                </li>
+                <li class="nav-item LogReg_navBar d-none">
+                     <a class="nav-link text-dark mr-3" href="page/profile.html" data-toggle="tooltip" title="Perfil"><i class="fa fa-user" aria-hidden="true"></i> Perfil</a>
+                </li>
+                <li class="nav-item LogReg_navBar d-none">
+                    <a class="nav-link text-dark" href="#" onclick="BTN_cerrar_sesion()" data-toggle="tooltip" title="Cerrar Sesión"><i class="fa fa-sign-out" aria-hidden="true"></i> Cerrar Sesión</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<!--/ end-NAVBAR /-->
+
+<!--/ start-ALERT /-->
+<div id="alert" class="alert alert-warning alert-dismissible fade show mt-2 d-none" style="position:fixed;top: 120px;left: 15%;width: 70%;z-index:9998;border-radius:0px;">
+    <strong><i class="fa fa-exclamation-circle fa-lg" aria-hidden="true"></i> ¡Hola!</strong> Preséntate para continuar: <a href="page/profile.html" class="alert-link"> COMPLETAR TU PERFIL</a>.
+</div>
+<!--/ end-ALERT /-->
+
+<!--/ start-PORTADA /-->
+<div id="portada" class="h-100 w-100">
+            <img src="image/carrousel_bg.png" class="d-block w-100" alt="" width="100vw" height="600vh" style="z-index:-10;">
+                <div class="container row mx-auto" style="width:auto;height:auto;position:absolute;top:0;bottom:0;left:0;right:0;">
+<div class="d-none d-lg-block">
+<div class="row mx-auto h-100" style="position:absolute;">
+                    <div class="col-6 my-auto" style="position:relative;left:450px;bottom:-250px">
+                        <span class="fa-stack text-warning" style="cursor: pointer;" onclick="presentation_btn(false)">
+                            <i class="fa fa-circle-thin fa-stack-2x" aria-hidden="true"></i>
+                            <i class="fa fa-angle-left fa-lg fa-stack-1x" aria-hidden="true"></i>
+                        </span>
+                        
+                        <i class="fa fa-chevron-circle-right fa-4x text-warning" aria-hidden="true" style="cursor: pointer;" onclick="presentation_btn(true)"></i>
+                    </div>
+
+                    <div class="col-6" style="position:relative;left:370px;bottom:-191px">
+                        <img id="portada_img" class="img-fluid" src="image/portada_1.png" width="700px">
+                    </div>
+</div>
+</div>
+
+<div class="row my-auto justify-content-sm-between justify-content-center">
+                    <div class="col-12 col-md-5 my-auto mx-auto">
+                        <div class="text-dark text-center mt-5">
+                            <h5 id="slide_qr_text" style="font-size: 25px">El servicio ideal <span style="font-size: 24px" class="text-muted mt-5">para ti y tu mascota</span></h5>
+                        
+                            <button id="slide_button" style="font-size: 20px" type="button" class="mt-4 btn btn-block btn-warning mt-2 text-uppercase text-white" onclick="location.href='page/register.html'"><span style="font-family: 'Baloo 2', cursive">registrarse</span></button>
+                            <img id="slide_qr" class="img-fluid mx-auto d-none" width="300px" height="auto" src="https://chart.googleapis.com/chart?chs=250x250&cht=qr&chl=1">
+                        </div>
+                    </div>
+
+                    <div class="col-4 d-none d-sm-block text-white text-center my-auto">
+                        <h5 class="mt-5" style="font-size: 25px">Manten tu mascota segura, con <!--<span style="font-family: 'Baloo 2', cursive;color:#004040">RegistraD<span style="color:#fc9436">O</span>G</span>--><span style="font-family: 'Baloo 2', cursive;color:#fff">REGISTRADOG</span></h5>
+                        <a style="font-size: 20px" type="button" class="mt-4 btn btn-block btn-outline-light mt-2 text-uppercase text-white" href="#escaner" onmouseover="this.classList.add('text-dark')" onmouseout="this.classList.remove('text-dark')"><span style="font-family: 'Baloo 2', cursive">escanear</span></a>
+                    </div>
+</div>
+
+                </div>
+</div>
+    <!--/ end-PORTADA /-->
+
+    <!--/ start-HIW /-->
+    <div id="hiw" class="container text-center">
+        <div class="bg-warning p-2 shadow text-white text-uppercase d-inline rounded pl-5 pr-5" style="font-size:22px;margin: auto; position: relative;top:-15px"> <span style="font-family: 'Baloo 2', cursive">asi es como funciona</span></div>
+    </div>
+    <!--/ end-HIW /-->
+
+    <!--/ start-PASOS /-->
+    <div class="container mt-5 justify-content-between mx-auto row">
+
+        <div class="col-lg-3 col-12 mb-5">
+            <div class="bg-white p-4 shadow rounded text-center" style="height:40vh" onmouseover="this.classList.remove('bg-white')" onmouseout="this.classList.add('bg-white')">
+                <i class="fa fa-pencil-square-o fa-4x text-warning" aria-hidden="true"></i>
+                <h5 class="card-title text-warning text-uppercase"><b><span style="font-family: 'Baloo 2', cursive">Registrate</span></b></h5>
+                <p class="text-muted">Crea un perfil y completa tus datos personales</p>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-12 mb-5">
+            <div class="bg-white p-4 shadow rounded text-center" style="height:40vh" onmouseover="this.classList.remove('bg-white')" onmouseout="this.classList.add('bg-white')">
+                <i class="fa fa-paw fa-4x text-warning" aria-hidden="true"></i>
+                <h5 class="card-title text-warning text-uppercase"><b><span style="font-family: 'Baloo 2', cursive">Registra tu mascota</span></b></h5>
+                <p class="text-muted">Registra tus mascotas y recibe un código y placa</p>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-12 mb-5">
+            <div class="bg-white p-4 shadow rounded text-center" style="height:40vh" onmouseover="this.classList.remove('bg-white')" onmouseout="this.classList.add('bg-white')">
+                <i class="fa fa-qrcode fa-4x text-warning" aria-hidden="true"></i>
+                <h5 class="card-title text-warning text-uppercase"><b><span style="font-family: 'Baloo 2', cursive">¡Escanea!</span></b></h5>
+                <p class="text-muted">Utiliza el QR o el código para ver la información de tu mascota</p>
+            </div>
+        </div>
+
+    </div>
+    <!--/ start-HIW /-->
+
+    <!--/ start-ESCANER /-->
+    <div id="escaner" class="container pt-4 pb-3">
+        <div class="row w-100 text-lg-left text-center mx-auto">
+            <p class="h2 w-100"><span style="font-family: 'Baloo 2', cursive">Escaner Web</span></p>
+        </div>
+    </div>
+
+    <span class="d-none d-lg-block">
+    <div class="container" style="height: 205px;background-image: url(image/banner.png);background-position: center;background-repeat: no-repeat, repeat;background-size: contain;">
+        <div class="col-5 h-100 mx-auto d-flex align-items-center">
+            <button type="button" style="font-size:30px;border-radius: 25px!important;" class="btn btn-outline-light btn-block text-white" onclick="window.location = 'page/scan.html';" onmouseover="this.classList.remove('text-white'); this.classList.add('text-dark');" onmouseout="this.classList.remove('text-dark');this.classList.add('text-white');"><span style="font-family: 'Baloo 2', cursive">
+            ESCANEAR </span><i class="fa fa-qrcode" aria-hidden="true"></i>
+            </button>
+        </div>
+    </div>
+    </span>
+    <span class="d-block d-lg-none w-100 text-center">
+    <button type="button" style="font-size:30px;border-radius: 25px!important;" class="btn btn-warning text-white shadow pr-5 pl-5" onclick="window.location = 'page/scan.html';">ESCANEAR <i class="fa fa-qrcode" aria-hidden="true"></i></button>
+    </span>
+    <!--/ end-ESCANER /-->
+
+    <!--/ start-PREGUNTAS /-->
+    <div id="preguntasF" class="container pt-5 pb-3">
+        <div class="row w-100 text-lg-left text-center mx-auto">
+            <p class="h2 w-100"><span style="font-family: 'Baloo 2', cursive">Preguntas Frecuentes</span></p>
+        </div>
+    </div>
+
+    <div class="container row mx-auto pb-4">
+            <div class="col-12 col-lg-7 pb-4 pb-lg-0">
+                                
+                <div class="card-deck mb-3">
+                        <div class="card border-0 shadow bg-white rounded">
+                            <div class="card-body text-center">
+                                <h4 class="card-title text-warning">
+                                    <span class="fa-stack d-block mx-auto">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-usd fa-stack-1x fa-inverse" aria-hidden="true"></i>
+                                    </span>
+                                    <span style="font-family: 'Baloo 2', cursive">¿Tiene algún costo?</span>
+                                </h4>
+                                <p class="card-text">
+                                    RegistraD<span style="color:#fc9436">O</span>G es un proyecto social gratuito y seguirá siéndolo siempre.  
+                                </p>
+                                <p class="card-text">
+                                    <a href="#" class="card-link text-warning">
+                                        Saber más
+                                    </a>
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="card border-0 shadow bg-warning rounded text-white">
+                            <div class="card-body text-center">
+                                <h4 class="card-title">
+                                    <span class="fa-stack d-block mx-auto">
+                                    <i class="fa fa-circle fa-stack-2x fa-inverse"></i>
+                                    <i class="fa fa-paw fa-stack-1x text-warning" aria-hidden="true"></i>
+                                    </span>
+                                    <span style="font-family: 'Baloo 2', cursive">¿Solo para perros?</span>
+                                </h4>
+                                <p class="card-text">
+                                    No. Aceptamos perros, gatos, cerditos, hurones... ¡La cantidad y tipo de mascotas que quieras!
+                                </p>
+                            </div>
+                        </div>
+                </div>
+
+
+                <div class="card-deck mb-3">
+                    <div class="card border-0 shadow bg-warning rounded text-white">
+                        <div class="card-body text-center">
+                            <h4 class="card-title">
+                                <span class="fa-stack d-block mx-auto">
+                                <i class="fa fa-circle fa-stack-2x fa-inverse"></i>
+                                <i class="fa fa-paper-plane fa-stack-1x text-warning" aria-hidden="true"></i>
+                                </span>
+                                <span style="font-family: 'Baloo 2', cursive">¿Debo ser mayor de edad?</span>
+                            </h4>
+                            <p class="card-text">
+                                   No. Puedes registrar tus mascotas siendo adulto, menor de edad o incluso extrangero. Simplemente ten cuidado de escribir datos sensibles.
+                            </p>
+                            <p class="card-text">
+                                <a href="#" class="card-link text-white">Cuidado de datos sensibles</a>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="card border-0 shadow bg-white rounded">
+                        <div class="card-body text-center">
+                            <h4 class="card-title text-warning">
+                                <span class="fa-stack d-block mx-auto">
+                                <i class="fa fa-circle fa-stack-2x text-warning"></i>
+                                <i class="fa fa-compass fa-stack-1x fa-inverse" aria-hidden="true"></i>
+                                </span>
+                                <span style="font-family: 'Baloo 2', cursive">¿De donde son?</span>
+                            </h4>
+                                <p class="card-text">
+                                    Actualmente estamos en Jamundí, Colombia. Pero queremos expandirmos por Colombia para ayudar a las personas a siempre estar conectadas con sus mascotas.
+                                </p>
+                                <p class="card-text">
+                                    <a href="#" class="card-link text-warning">¿Tienes una idea?</a>
+                                </p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="col-12 col-lg-5 my-auto">
+                <h6><span style="font-family: 'Baloo 2', cursive">Nos interesa mucho su opinión para mejorar, por favor comuníquese con nosotros</span></h6>
+                <form>
+                    <div class="form-group">
+                        
+                        <input id="pqrs_email" name="email" type="text" class="form-control border border-warning bg-transparent" placeholder="Ingresa tu e-mail">
+                    </div>
+
+                    <div class="form-group">
+                        <input id="pqrs_nombre" name="nombre" type="text" class="form-control border border-warning bg-transparent " placeholder="Tu nombre">
+                    </div>
+
+                    <div class="form-group">
+                        <textarea id="pqrs_body" name="e-body" type="text" class="form-control border border-warning bg-transparent" rows="5" placeholder="Conteido del mensaje"></textarea>
+                    </div>
+
+
+                    <div class="row">
+
+                        <div class="col">
+                            <button type="button" class="btn btn-warning btn-block text-white"
+                            onclick="pqrs()">Enviar</button>
+                        </div>
+
+                        <div class="col d-flex justify-content-center text-muted">
+                            <div class="custom-control custom-checkbox mb-3">
+                                <input type="checkbox" class="custom-control-input" id="pqrsTyC" name="" style="vertical-align: middle;"/>
+                                <label class="custom-control-label" for="pqrsTyC"><small>Acepto el tratamiento de datos personales</small></label>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+<!--/ end-PQRS /-->
+
+<!--/ start-FOOTER /-->
+<div class="row w-100 mx-auto justify-content-center p-3 pr-5 pl-5 bg-white">
+
+        <div class="col-12 col-lg-3 mb-3 my-auto">
+            <div class="row font-weight-bold pb-2"><h8><span style="font-family: 'Baloo 2', cursive">Suscríbete a nuestro newspaper</span></h8></div>
+            <input placeholder="correo electrónico" type="email" class="form-control mb-3 border-warning" id="np_umail">
+            <button type="button" class="btn btn-warning btn-block text-white mb-5" onclick="var mc = MailContact('museortiz@gmail.com', document.getElementById('np_umail').value);if(mc='100'){alert('mail enviado con éxito')}else{alert('hubo un problema al comunicarse')}document.getElementById('np_umail').value='';">Enviar</button>
+        </div>
+
+        <div class="col-12 col-lg-2 pb-3 my-auto">
+            <div class="d-flex flex-column">
+                <h6 class="text-center">Sitemap</h6>
+                <a href="page/register.html" class="p-2 badge text-secondary">Registrarse</a>
+                <a href="page/login.html" class="p-2 badge text-secondary">Iniciar Sesión</a>
+                <a href="page/SAC.html" class="p-2 badge text-secondary">Atención al Cliente</a>
+                <a href="page/data.html" class="p-2 badge text-secondary">Tratamiento de Datos</a>
+            </div>
+        </div>
+
+        <div class="col-12 col-lg-2 pb-3 my-auto">
+            <div class="d-flex flex-column">
+                <h6 class="text-center">El Sitio</h6>
+                <a href="#hiw" class="p-2 badge text-secondary">Cómo empezar</a>
+                <a href="#escaner" class="p-2 badge text-secondary">Escaner de placas</a>
+                <a href="#preguntasF" class="p-2 badge text-secondary">Preguntas Frecuentes</a>
+                <a href="#" class="p-2 badge text-secondary">Portal</a>
+            </div>
+        </div>
+
+        <div class="col-12 col-lg-3 pb-3 text-center text-lg-right my-auto">
+            <div class="font-weight-bold"><span style="font-family: 'Baloo 2', cursive">RegistraDOG</span></div>
+            <div class="text-secondary" style="font-size:12px">
+                <p>marca de PaseaDOG en Cali, Colombia.</p>
+                <p>contacto: museortiz@gmail.com - Diego Ortiz</p>
+                <p>Copyrigth 2022</p>
+            </div>
+        </div>
+
+</div>
+<!--/ end-FOOTER /-->
+</body>
+
+<script type="text/javascript">
+
+var qr_image = "https://chart.googleapis.com/chart?chs=150x150&cht=qr&chl=";
+var images_portada = ["image/portada_1.png","image/portada_2.png","image/portada_3.png","image/portada_4.png","image/portada_5.png"], current_portada=0;
+
+var presentation_slider = setInterval(myTimer, 5000);
+function myTimer() {
+  presentation_btn(true);
+}
+function presentation_btn(r)
+{
+    clearInterval(presentation_slider);
+    presentation_slider = setInterval(myTimer, 5000);
+    if(r){current_portada++;if(current_portada==images_portada.length){current_portada=0}}else{current_portada--;if(current_portada<0){current_portada=images_portada.length-1}}
+    //console.log(current_portada + " "+images_portada.length);
+    document.getElementById('portada_img').src = images_portada[current_portada];
+}
+/**
+ * Title.
+ * 
+ * content.
+ * 
+ * @param {r} description.
+ * 
+ * @returns Description
+*/
+function iniciar()
+{
+    //iniciar consola
+    console.log("%cALERTA", "font-size:40px;color:yellow;");
+    console.log("%cTenga cuidado al usar esta consola, podría ser víctima de suplantación de identidad y robo de información. No escriba un código que no entienda.", "font-size:25px;color:black;background-color:#CC4;");
+
+    //intento de recoger sesión iniciada
+    var localStorade = window.localStorage;
+    var name = localStorage.getItem('nombre');
+    var u_correo = localStorade.getItem('u_correo');
+    var u_id = localStorade.getItem('u_id');
+    var virgen = localStorage.getItem('virgen');
+
+    //mientras si exista sesión iniciada cambiar menu
+    if(name!=null)
+    {
+        //usuario antiguo
+         document.getElementById('NavUsername').innerHTML = name;
+         document.getElementById('NavUsername').classList.add("text-uppercase");
+         document.getElementsByClassName('LogReg_navBar')[0].classList.add("d-none");
+         document.getElementsByClassName('LogReg_navBar')[1].classList.add("d-none");
+         document.getElementsByClassName('LogReg_navBar')[2].classList.remove("d-none");
+         document.getElementsByClassName('LogReg_navBar')[3].classList.remove("d-none");
+         document.getElementsByClassName('LogReg_navBar')[4].classList.remove("d-none");
+        //confirmar el dueno id
+        if(u_id==null)
+        {
+            var u_id = httpGet("https://script.google.com/macros/s/AKfycbxJr7WjDsNpRdAEAQqBoMlXeiAj6mV6Zhozr0LU34XURDEb9GF3bVhUbJ94CeeqvS2p/exec?u=root&p=menealacola&func="+("select (id) from duenos where usuario_correo="+window.localStorage.getItem('u_correo')).replaceAll(" ","%20"));
+            if(u_id[0]=="200"){u_id=u_id[1]; localStorage.setItem('u_id', u_id);}
+        }
+        
+        //traer info de mascotas
+        if(localStorade.getItem('mascotas')==null)
+        {
+            let consultamascotas = "https://script.google.com/macros/s/AKfycbxJr7WjDsNpRdAEAQqBoMlXeiAj6mV6Zhozr0LU34XURDEb9GF3bVhUbJ94CeeqvS2p/exec?u=root&p=menealacola&func="+("select (nombre,placa) from mascotas where id_dueño="+u_id).replaceAll(" ","%20");
+            var request = httpGet(consultamascotas);
+            if(request[0]=="200")
+            {
+                localStorade.setItem('mascotas',JSON.stringify(request[1]));
+                for (var i = 0; i <= request[1].length-1; i++) {
+                //<a class="dropdown-item text-muted" href="page/register_pet.html">añadir una mascota</a>
+                var element = document.createElement("a");
+                element.classList.add('dropdown-item');
+                element.setAttribute('onclick','mascota_click("'+request[1][i][1]+'")');
+                element.setAttribute('style','cursor:pointer;')
+                var text = document.createTextNode(request[1][i][0]);
+                element.appendChild(text);
+                document.getElementById('dpmenu_mascotas').appendChild(element);}
+
+            }else{
+                //console.log('El usuario no tiene mascotas');
+                document.getElementsByClassName('LogReg_navBar')[2].classList.add("d-none");
+            }
+        }else{
+            const request = JSON.parse(localStorade.getItem('mascotas'));
+            //console.log('Cargando mascotas antiguas');
+            for (var i = 0; i <= request.length-1; i++) {
+                
+                var element = document.createElement("a");
+                element.classList.add('dropdown-item');
+                element.setAttribute('onclick','mascota_click("'+request[i][1]+'")');
+                element.setAttribute('style','cursor:pointer;')
+                var text = document.createTextNode(request[i][0]);
+                element.appendChild(text);
+                document.getElementById('dpmenu_mascotas').appendChild(element);
+                }
+        }
+
+    }
+    //primera vez de un usuario
+    if(virgen=='true')
+    {
+        console.log('Usuario sin perfil');
+        document.getElementsByClassName('LogReg_navBar')[0].classList.add("d-none");
+        document.getElementsByClassName('LogReg_navBar')[1].classList.add("d-none");
+        document.getElementsByClassName('LogReg_navBar')[3].classList.remove("d-none");
+        document.getElementsByClassName('LogReg_navBar')[4].classList.remove("d-none");
+        document.getElementById('slide_button').classList.add('d-none');
+        document.getElementById('alert').classList.remove('d-none');
+    }
+    
+    //iniciacion no dinamica
+
+    //setfavicon
+
+    var today = new Date();
+    var ddmm = String(today.getDate()).padStart(2, '0')+String(today.getMonth() + 1).padStart(2, '0');
+    //fines de semanas
+    if(today.getDay()==6 || today.getDay()==0){changeFavicon('image/icon/Ronnie_sport.png');console.log('asd')}    
+    if(ddmm=='2412'||ddmm=='2512'){ changeFavicon('image/icon/Ronnie_navidad.png');}else
+    if(ddmm=='3110'){changeFavicon('image/icon/Ronnie_helloween.png');}else
+    if(ddmm=='1709'||ddmm=='1402'){ changeFavicon('image/icon/Ronnie_inlove.png');}else
+    {
+        //festividades
+    }
+    console.log(today.getDay());
+    
+}
+function BTN_cerrar_sesion()
+{
+    var localStorade = window.localStorage;
+    localStorage.clear();
+    location.reload();
+}
+function mascota_click(placa) {
+    qr_image += "url="+placa;
+    //traer info a usar mascota
+    var mascotaescogida = httpGet("https://script.google.com/macros/s/AKfycbxJr7WjDsNpRdAEAQqBoMlXeiAj6mV6Zhozr0LU34XURDEb9GF3bVhUbJ94CeeqvS2p/exec?u=root&p=menealacola&func="+("select * from mascotas where placa="+placa).replaceAll(" ","%20"));
+    if(mascotaescogida[0]=="200"){mascotaescogida=mascotaescogida[1].toString().split(",");}else{alert("error "+mascotaescogida[0]);}
+    //cambiar favicon        
+    if(mascotaescogida[6]=='macho')
+    {
+        changeFavicon('image/icon/'+mascotaescogida[9]+'.png');
+    }else{
+        changeFavicon('image/icon/'+mascotaescogida[9]+'_girl.png');
+    }
+    //mostrar QR
+    document.getElementById('slide_qr').classList.remove('d-none');
+    document.getElementById('slide_button').classList.add('d-none');
+    document.getElementById('slide_qr').src = "https://chart.googleapis.com/chart?chs=150x150&cht=qr&chl="+window.location.href.substring(0, window.location.href.lastIndexOf('/'))+"/"+"page/scan.html"+"?placa="+mascotaescogida[8];
+    document.getElementById('slide_qr_text').innerHTML = "Este es el QR de <span style='font-size: 24px' class='text-muted'> tu mascota "+mascotaescogida[1]+"</span>";
+}
+function changeFavicon(src)
+{
+     var link = document.createElement('link'),
+         oldLink = document.getElementById('dynamic-favicon');
+     link.id = 'dynamic-favicon';
+     link.rel = 'shortcut icon';
+     link.href = src;
+     if (oldLink) {document.head.removeChild(oldLink);}
+    document.head.appendChild(link);
+}
+function pqrs()
+{    
+    if(document.getElementById('pqrs_email').value!="" && document.getElementById('pqrs_nombre').value!="" && document.getElementById('pqrs_body').value!="")
+    {
+        if(document.getElementById('pqrsTyC').checked!=false)
+            {
+                //extrae valores
+                var umail = document.getElementById('pqrs_email').value;
+                document.getElementById('pqrs_email').value = "";
+                var ucontent = "De: "+document.getElementById('pqrs_nombre').value+" Mensaje: "+document.getElementById('pqrs_body').value;
+                document.getElementById('pqrs_nombre').value = "";
+                document.getElementById('pqrs_body').value = "";
+                document.getElementById('pqrsTyC').checked=false;
+
+
+               var mc = MailContact("museortiz@gmail.com", umail, ucontent);
+               if(mc="100"){alert('mail enviado con éxito')}else{alert('hubo un problema al comunicarse')}
+
+            }else{
+                alert('Debes aceptar el tratamiento de datos antes');
+            }
+        }else{
+            alert('completa todos los campos');
+        }
+        
+    }
+    function httpGet(theUrl)
+    {
+        var xmlHttp = new XMLHttpRequest();
+        xmlHttp.open( "GET", theUrl, false );
+        xmlHttp.send( null );
+        var respuesta=xmlHttp.response;
+        const res = JSON.parse(respuesta.toString());
+        return res;
+    }
+</script>
+</html>

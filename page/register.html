@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <title>RastreaDog | REGÍSTRATE</title>
+  <link rel="icon" type="image/png" href="../image/icon/ronnie.png"/>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<nav class="navbar shadow navbar-expand-sm bg-dark navbar-light bg-white" style="height:13vh;z-index: 9999;">
+    <div class="container text-dark">
+
+    <img src="../image/logo/isotipo.png" style="width:70px;cursor: pointer;" onclick="window.open('../index.html','_self')">
+        <div class="nav-text d-none d-sm-block p-3" id="NavUsername" style="font-family: 'Baloo 2', cursive;font-size: 35px;color:#004040">RegistraD<span style="color:#fc9436">O</span>G</div>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar"><span class="navbar-toggler-icon"></span></button>
+
+
+
+        <div class="collapse navbar-collapse justify-content-end" id="collapsibleNavbar">
+            <ul class="navbar-nav p-3">
+                <li class="nav-item">
+                    <a class="nav-link text-dark" href="../index.html" data-toggle="tooltip" title="Volver al Inicio"><i class="fa fa-home" aria-hidden="true"></i> Volver</a>
+                </li>
+            </ul>
+        </div>
+</div>
+</nav>
+
+<div class="d-flex justify-content-center bg-light align-items-center" style="height: 80vh">
+<div class="d-flex flex-column rounded bg-white shadow text-center p-5 mt-5 col-lg-6 col-md-8 col-sm-10 col-11">
+
+<!-- The Modal -->
+  <div class="modal fade" id="myModal">
+    <div class="modal-dialog modal-dialog-scrollable modal-lg">
+      <div class="modal-content">
+      
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title text-warning">Términos y Condiciones</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        
+        <!-- Modal body -->
+        <div class="modal-body text-left text-muted">
+            <p><b>RegistraDOG</b></p>
+            <p><b>1. Identificación.</b> RegistraDOG es un servicio diseñado, escrito y desarrollado por Diego Ortiz con la CC 1151968255 para uso libre no exclusivo en Jamundí, Colombia. <b>2. Requisitos.</b> El usuario, desde ahora denominado "EL DUEÑO" deberá ser responsable de una mascota legal, vivir bajo territorio Colombiano. <b>3. Descripción del servicio.</b> El registro al sistema es gratuito, EL DUEÑO debe diligenciar el formulario de usuario y después de confirmar su cuenta podrá agregar sus datos personales a su perfil. Cada vez que desee registrar una mascota podrá hacerlo desde su perfil personal. Una vez registrada una mascota se le asignará un número único de indentificación llamado PLACA, también se le enviará un QR de su placa via correo electrónico. <b>4. Tarifas.</b> El uso del serivicio está sujeto a la disponibilidad de Alphabet Inc. con sus servicios de la plataforma de su filial Google Cloud. Nos reservamos el derecho de ofrecer productos relacionados con las mascotas y el servicio en cualquier momento. <b>5. Propiedad Intelectual.</b> Este sistema es virtual y está protegido por las leyes de derechos de autor, los usuarios no tienen derechos de explotación sobre la marca, o los servicios de RegistraDOG. <b>6. Limitación del servicio.</b> Si se detecta que el DUEÑO no cumple algún requisito, si inclumple este contrato, atenta contra la marca o la ley colombiana vigente en algún aspecto se le revocará el acceso a la plataforma, y según el caso, se cambiarán o eliminarán los códigos de registro de sus mascotas. Si Google, filial de Alphabet Inc decide que el servicio o los usuarios incumple sus políticas tendrá acceso a compartir, eliminar o limitar el servicio. <b>7. Protección de datos personales.</b> Protegeremos sus datos sensibles con toda las herramientas al alcance. No la compartiremos a países o empresas que no proporcionen niveles adecuados de protección de datos. Es posible que se analicen los datos recopilados con fines estadísticos pero siempre conservando la intimidad personal. <b>8. Newspaper.</b> Al aceptar el servicio automaticamente queda registrado en nuestra lista para envío de correo electrónico. Podrá dessuscribirse de la lista en cualquier momento. <b>9. Legislación.</b> Bajo ninguna circunstancia estos términos y condiciones pueden reemplazar alguna ley o artículo de la contitución colombiana o internacional. Copyrigth 2022. Si continúa con el registro acepta los términos y condiciones del uso de este servicio.</p>
+        </div>
+        <!-- Modal footer -->
+        <div class="modal-footer d-flex justify-content-center text-center">
+            <div class="col-7">
+                <label class="form-check-label text-muted">
+            <input id="checkTyC" type="checkbox" class="form-check-input" value="">Acepto lo leido previamente
+          </label>
+          
+            </div>
+            <div class="col-3">
+                <button id="modal-s-btn" send="0" type="button" class="btn btn-warning text-white disabled" onclick="
+                if(this.classList.contains('disabled')){
+                        alert('Debes aceptar los Términos y Condiciones del Servicio para registrarte c:');
+                }else{
+                if(this.getAttribute('send')=='0')
+                {
+                    this.setAttribute('send',1);
+                    this.children[0].classList.add('d-none');
+                    this.children[1].classList.remove('d-none');
+                    SendForm();
+                }}">
+                    <span> ACEPTAR </span>
+                    <span class="d-none"><i class="fa fa-circle-o-notch fa-spin fa-lg fa-fw"></i></span>
+                </button>   
+            </div>
+          
+        </div>
+        
+      </div>
+    </div>
+  </div>
+<!-- The Modal -->
+
+<!-- The Modal -->
+  <div class="modal fade" id="succesModal">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">      
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title text-warning">¡REGISTRO EXITOSO!</h4>
+        </div>
+        
+        <!-- Modal body -->
+        <div class="modal-body text-left text-muted">
+            <p>Te enviamos un correo electrónico para que confirmes tu cuenta. Revisa la bandeja de tu correo electrónico e inicia sesión.</p>
+        </div>
+        <!-- Modal footer -->
+        <div class="modal-footer d-flex justify-content-center text-center">
+                <button type="button" class="btn btn-warning text-white" onclick="window.location.replace('login.html');">ACEPTAR</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+<!-- The Modal -->
+
+<form>
+<img class="w-100" src="../image/portada-ln.png">
+<!--/ ALERTAS /-->
+<div id="error" class="alert alert-danger alert-dismissible fade show mt-2 d-none">
+    <strong><i class="fa fa-exclamation-circle" aria-hidden="true"></i> No reconozco este olor :c</strong><br> ¿Escribiste tu usuario, correo o pin correctamente?<br><small class="text-muted">también puedes registrarte <a href="register.html">aquí</a></small>
+  </div>
+<!--/ ALERTAS /-->
+    <div class="form-group">
+      <input type="text" class="form-control text-warning border-muted text-center" id="mail" name="correo" placeholder="correo electrónico" onblur="confirmarCorreo()" data-toggle="tooltip" title="Escribe un correo electrónico personal">
+    </div>
+      <div class="form-group">
+      <input type="text" class="form-control text-warning border-muted text-center" id="mail2" name="correo" placeholder="confirma tu correo" onblur="confirmarCorreo()" data-toggle="tooltip" title="Vuelve a escribir tu correo electrónico">
+    </div>
+    <div class="form-group">
+    <input type="text" class="form-control text-warning border-muted text-center" id="usr" name="username" placeholder="nombre de usuario" onblur="comprobar()" data-toggle="tooltip" title="elige un nombre de usuario, lo usarás para iniciar sesión">
+    </div>
+    <div class="form-group">
+      <input type="password" class="form-control text-warning border-muted text-center" onkeypress='return event.charCode >= 48 && event.charCode <= 57' id="pwd" name="password" placeholder="pin de acceso" onblur="comprobar()" maxlength="4" data-toggle="tooltip" title="elige un pin de 4 números para iniciar sesión" >
+    </div>
+    <button type="button" onclick="if(document.getElementById('mail').classList.contains('border-warning')){tyc()}else{alert('Ups! Los correos no son iguales')}" class="btn btn-warning text-white text-uppercase"><b>Registrarse</b></button>
+  </form>
+</div>
+</div>
+
+<script>
+    
+
+function confirmarCorreo()
+{
+	if((document.getElementById('mail').value!="" || document.getElementById('mail2').value!="")&&document.getElementById('mail').value==document.getElementById('mail2').value)
+    {
+        document.getElementById('mail').classList.add("border-warning");
+        document.getElementById('mail2').classList.add("border-warning");        
+        document.getElementById('mail').classList.add("text-warning");
+        document.getElementById('mail2').classList.add("text-warning");
+
+        document.getElementById('mail').classList.remove("border-danger");
+        document.getElementById('mail2').classList.remove("border-danger");
+        document.getElementById('mail').classList.remove("text-danger");     
+        document.getElementById('mail2').classList.remove("text-danger");
+    }
+    else
+    {
+        document.getElementById('mail').classList.add("border-danger");
+        document.getElementById('mail2').classList.add("border-danger");
+        document.getElementById('mail').classList.add("text-danger");
+        document.getElementById('mail2').classList.add("text-danger");
+        document.getElementById('mail').classList.remove("border-warning");        
+        document.getElementById('mail2').classList.remove("border-warning");
+        document.getElementById('mail').classList.remove("text-warning");        
+        document.getElementById('mail2').classList.remove("text-warning");
+        
+    }
+}
+function comprobar()
+{
+    if(document.getElementById('usr').value!="") 
+        {
+            document.getElementById('usr').classList.add("border-warning");
+            document.getElementById('usr').classList.add("text-warning");
+            document.getElementById('usr').classList.remove("border-muted");
+            document.getElementById('usr').classList.remove("text-muted");
+        }else{
+            document.getElementById('usr').classList.remove("border-warning");
+            document.getElementById('usr').classList.remove("text-warning");
+            document.getElementById('usr').classList.add("border-muted");
+            document.getElementById('usr').classList.add("text-muted");
+        }
+    if(document.getElementById('pwd').value!="")
+        {
+            document.getElementById('pwd').classList.add("border-warning");
+            document.getElementById('pwd').classList.add("text-warning");
+            document.getElementById('pwd').classList.remove("border-muted");
+            document.getElementById('pwd').classList.remove("text-muted");
+        }else{
+            document.getElementById('pwd').classList.remove("border-warning");
+            document.getElementById('pwd').classList.remove("text-warning");
+            document.getElementById('pwd').classList.add("border-muted");
+            document.getElementById('pwd').classList.add("text-muted");
+        }
+}
+
+function tyc()
+{
+    //vadidacion de campos
+    var umail = document.getElementById('mail').value;    
+    var ulogin = document.getElementById('usr').value;    
+    var upwd = document.getElementById('pwd').value;
+    
+    if(umail.length==0 || ulogin.length==0 || upwd.length==0){alert("Oye, necesito todos los datos para seguir :c");return;}
+
+    $("#checkTyC").change(function() {
+        document.getElementById("modal-s-btn").classList.toggle("disabled");
+});
+    $('#myModal').modal();    
+}
+
+function SendForm()
+{
+    //toma los datos
+    var umail = document.getElementById('mail').value;    
+    var ulogin = document.getElementById('usr').value;    
+    var upwd = document.getElementById('pwd').value;
+        //elimina los datos de los campos de texto    
+    	document.getElementById('mail').value = "";
+        document.getElementById('mail2').value = "";
+    	document.getElementById('usr').value = "";
+    	document.getElementById('pwd').value = "";
+        //retomar aspecto
+        document.getElementById('mail2').classList.add("border-warning");
+    	document.getElementById('mail2').classList.remove("border-danger");
+    	document.getElementById('mail').classList.add("border-warning");
+        document.getElementById('mail').classList.remove("border-danger");
+        //enviar datos
+        let url = "https://script.google.com/macros/s/AKfycbxJr7WjDsNpRdAEAQqBoMlXeiAj6mV6Zhozr0LU34XURDEb9GF3bVhUbJ94CeeqvS2p/exec?u=root&p=menealacola&func=insert%20usuarios%20(correo,usuario,pin)%20values%20("+umail+","+ulogin+",'"+upwd+")";
+    var respuesta = httpGet(url);
+    if(respuesta!="202"){$('#succesModal').modal();}
+    $('#myModal').modal('hide');
+}
+function httpGet(theUrl)
+{
+    var xmlHttp = new XMLHttpRequest();
+    xmlHttp.open( "GET", theUrl, false );
+    xmlHttp.send( null );
+    var respuesta=xmlHttp.response;
+    const res = JSON.parse(respuesta.toString());
+    return res;
+}
+</script>
+</body>
+</html>
