@@ -85,15 +85,15 @@
                 document.getElementById('icon_name').innerHTML=myicon;
                 switch (document.getElementById('tipo').value) {
           case '1':
-          changeIcon('../image/icon/'+iconfrom(1));
+          changeIcon(iconfrom(1));
           document.getElementById('raza').classList.remove('d-none');
             break;
           case '2':
-          changeIcon('../image/icon/'+iconfrom(3));
+          changeIcon(iconfrom(3));
           document.getElementById('raza').classList.remove('d-none');
             break;
             case '3':
-          changeIcon('../image/icon/'+iconfrom(5));
+          changeIcon(iconfrom(5));
           document.getElementById('otro_tipo').classList.remove('d-none');
           document.getElementById('img-pet').classList.add('d-none');
             break;
@@ -313,7 +313,7 @@ function cargarRazas()
             hoy.getDate()+"/"+(hoy.getMonth()+1)+"/"+hoy.getFullYear()+"-"+hoy.getHours()+":"+hoy.getMinutes()+":"+hoy.getSeconds(),
             document.getElementById('nombre').value.replaceAll(" ","-"),
             document.getElementById('cumple').value,
-            document.getElementById('mes_ano').value,
+            "'01/"+document.getElementById('mes_ano').value,
             "",
             document.getElementById('peso').value,
             document.getElementById('sexo').value,
@@ -329,7 +329,7 @@ function cargarRazas()
             if(insertM[0]=="200"){
                 document.getElementById('finish').classList.remove('d-none');
                 document.getElementById('inscription').classList.add('d-none');
-                document.getElementById('finish__icon').src = '../image/icon/'+iconfrom(4);
+                document.getElementById('finish__icon').src = iconfrom(4);
                 changeFavicon(document.getElementById('finish__icon').src);
             }else{
                 alert('problem para insertar mascota a la bd');
@@ -357,7 +357,7 @@ function cambiarAvatar(boo)
     }
 
     myicon=icons[index];
-    changeIcon('../image/icon/'+iconfrom(1));
+    changeIcon('https://museortizmedia.github.io/rastreadog/image/icon/'+iconfrom(1));
 
     document.getElementById('icon_name').innerHTML=myicon;
     }

@@ -102,8 +102,7 @@ function cargarMascotasBoard()
     request = request[1];
     for (var i = 0; i <= request.length-1; i++) {
         var datos = request[i].toString().split(",");
-        var fecha = datos[1]!=""? datos[1].split("T")[0] : datos[2].split("T")[0].split("-")[0]+"-"+datos[2].split("T")[0].split("-")[1];
-        //fecha = fecha.;
+        var fecha = datos[1]!=""? datos[1].split("T")[0] : datos[2].toString().split("01/")[1];
         var icon = datos[3]=="macho"? datos[5]+"_happy.png":datos[5]+"_girl.png";
         document.getElementById('board').insertAdjacentHTML("beforeend",
         "<a placa='"+datos[4]+"' class='list-group-item list-group-item-action' style='cursor: default'><div class='d-flex w-100 justify-content-between'><div><input type='checkbox' id='defaultCheck'  class='mr-2' onclick='if(this.parentElement.parentElement.parentElement.classList.contains(\"active\")){selec.splice(selec.indexOf(\""+datos[4]+"\"),1);if(selec==0){desactivarborrar();}}else{selec.push(\""+datos[4]+"\");activarborrar();}this.parentElement.parentElement.parentElement.classList.toggle(\"active\");'><img src='../image/icon/"+icon+"' style='width:60px' class='ml-5'></div><div class='btn-group w-75'><button class='btn text-muted' style='cursor: default;''><b>"+datos[0]+"</b></button><button class='btn text-muted' style='cursor: default;'><b>"+fecha+"</b></button><button class='btn text-muted text-capitalize' style='cursor: default;'><b>"+datos[3]+"</b></button><button class='btn text-muted' style='cursor: default;'><b>"+datos[4]+"</b></button></div></div></a>"
