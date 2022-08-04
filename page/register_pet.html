@@ -66,8 +66,8 @@
         <div class="row justify-content-center" style="position: absolute;left: 0; right: 0; margin: auto; top: -85px;width: 100%;">
             <i id="iconCL" class="fa fa-chevron-left fa-lg my-auto clicleable d-non" aria-hidden="true" onclick="cambiarAvatar(false)"></i>
             <div>
-                <span id="icon_name" class="d-block text-dark">¿?</span>
-                <img id="icon" class="d-block mx-auto" src="../image/icon/unlock.png" width="150px">
+                <span id="icon_name" class="d-block"><span style="font-family: 'Baloo 2', cursive;color:#004040">¿?</span></span>
+                <img id="icon" class="d-block mx-auto" src="https://museortizmedia.github.io/rastreadog/image/icon/unlock.png" width="150px">
             </div>
             <i id="iconCR" class="fa fa-chevron-right fa-lg my-auto clicleable d-non" aria-hidden="true" onclick="cambiarAvatar(true)"></i>
         </div>
@@ -98,7 +98,7 @@
           document.getElementById('img-pet').classList.add('d-none');
             break;
           default:
-          changeIcon('../image/icon/unlock.png');
+          changeIcon('https://museortizmedia.github.io/rastreadog/image/icon/unlock.png');
           document.getElementById('icon_name').innerHTML='';
         }
         
@@ -357,7 +357,7 @@ function cambiarAvatar(boo)
     }
 
     myicon=icons[index];
-    changeIcon('https://museortizmedia.github.io/rastreadog/image/icon/'+iconfrom(1));
+    changeIcon(iconfrom(1));
 
     document.getElementById('icon_name').innerHTML=myicon;
     }
