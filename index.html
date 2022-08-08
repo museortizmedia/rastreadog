@@ -378,7 +378,7 @@ function iniciar()
     //mientras si exista sesión iniciada cambiar menu
     if(name!=null)
     {
-        //usuario antiguo
+        //console.log('usuario antiguo')
          document.getElementById('NavUsername').innerHTML = name;
          document.getElementById('NavUsername').classList.add("text-uppercase");
          document.getElementsByClassName('LogReg_navBar')[0].classList.add("d-none");
@@ -413,7 +413,7 @@ function iniciar()
 
             }else{
                 //console.log('El usuario no tiene mascotas');
-                document.getElementsByClassName('LogReg_navBar')[2].classList.add("d-none");
+                //document.getElementsByClassName('LogReg_navBar')[2].classList.add("d-none");
             }
         }else{
             const request = JSON.parse(localStorade.getItem('mascotas'));
@@ -434,7 +434,7 @@ function iniciar()
     //primera vez de un usuario
     if(virgen=='true')
     {
-        console.log('Usuario sin perfil');
+        //console.log('Usuario sin perfil');
         document.getElementsByClassName('LogReg_navBar')[0].classList.add("d-none");
         document.getElementsByClassName('LogReg_navBar')[1].classList.add("d-none");
         document.getElementsByClassName('LogReg_navBar')[3].classList.remove("d-none");
@@ -442,23 +442,18 @@ function iniciar()
         document.getElementById('slide_button').classList.add('d-none');
         document.getElementById('alert').classList.remove('d-none');
     }
-    
-    //iniciacion no dinamica
 
     //setfavicon
-
     var today = new Date();
     var ddmm = String(today.getDate()).padStart(2, '0')+String(today.getMonth() + 1).padStart(2, '0');
     //fines de semanas
-    if(today.getDay()==6 || today.getDay()==0){changeFavicon('image/icon/Ronnie_sport.png');console.log('asd')}    
-    if(ddmm=='2412'||ddmm=='2512'){ changeFavicon('image/icon/Ronnie_navidad.png');}else
-    if(ddmm=='3110'){changeFavicon('image/icon/Ronnie_helloween.png');}else
-    if(ddmm=='1709'||ddmm=='1402'){ changeFavicon('image/icon/Ronnie_inlove.png');}else
+    if(today.getDay()==6 || today.getDay()==0){changeFavicon('https://museortizmedia.github.io/rastreadog/https://museortizmedia.github.io/rastreadog/image/icon/Ronnie_sport.png');}    
+    if(ddmm=='2412'||ddmm=='2512'){ changeFavicon('https://museortizmedia.github.io/rastreadog/image/icon/Ronnie_navidad.png');}else
+    if(ddmm=='3110'){changeFavicon('https://museortizmedia.github.io/rastreadog/image/icon/Ronnie_helloween.png');}else
+    if(ddmm=='1709'||ddmm=='1402'){ changeFavicon('https://museortizmedia.github.io/rastreadog/image/icon/Ronnie_inlove.png');}else
     {
         //festividades
     }
-    console.log(today.getDay());
-    
 }
 function BTN_cerrar_sesion()
 {
@@ -474,9 +469,9 @@ function mascota_click(placa) {
     //cambiar favicon        
     if(mascotaescogida[6]=='macho')
     {
-        changeFavicon('image/icon/'+mascotaescogida[9]+'.png');
+        changeFavicon('https://museortizmedia.github.io/rastreadog/image/icon/'+mascotaescogida[9]+'.png');
     }else{
-        changeFavicon('image/icon/'+mascotaescogida[9]+'_girl.png');
+        changeFavicon('https://museortizmedia.github.io/rastreadog/image/icon/'+mascotaescogida[9]+'_girl.png');
     }
     //mostrar QR
     document.getElementById('slide_qr').classList.remove('d-none');
