@@ -97,7 +97,7 @@
                             <h5 id="slide_qr_text" style="font-size: 25px">El servicio ideal <span style="font-size: 24px" class="text-muted mt-5">para ti y tu mascota</span></h5>
                         
                             <button id="slide_button" style="font-size: 20px" type="button" class="mt-4 btn btn-block btn-warning mt-2 text-uppercase text-white" onclick="location.href='page/register.html'"><span style="font-family: 'Baloo 2', cursive">registrarse</span></button>
-                            <img id="slide_qr" class="img-fluid mx-auto d-none" width="300px" height="auto" src="https://chart.googleapis.com/chart?chs=250x250&cht=qr&chl=1">
+                            <img id="slide_qr" class="img-fluid mx-auto d-none" width="300px" height="auto" src="https://chart.googleapis.com/chart?chs=250x250&cht=qr&chl=1" onclick="window.open(this.src)" style="cursor:pointer">
                         </div>
                     </div>
 
@@ -476,7 +476,7 @@ function mascota_click(placa) {
     //mostrar QR
     document.getElementById('slide_qr').classList.remove('d-none');
     document.getElementById('slide_button').classList.add('d-none');
-    document.getElementById('slide_qr').src = "https://chart.googleapis.com/chart?chs=150x150&cht=qr&chl="+window.location.href.substring(0, window.location.href.lastIndexOf('/'))+"/"+"page/scan.html"+"?placa="+mascotaescogida[8];
+    document.getElementById('slide_qr').src = "https://chart.googleapis.com/chart?chs=500x500&cht=qr&chl="+window.location.href.substring(0, window.location.href.lastIndexOf('/'))+"/"+"page/scan.html"+"?placa="+mascotaescogida[8];
     document.getElementById('slide_qr_text').innerHTML = "Este es el QR de <span style='font-size: 24px' class='text-muted'> tu mascota "+mascotaescogida[1]+"</span>";
 }
 function changeFavicon(src)
