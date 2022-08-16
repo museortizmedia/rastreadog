@@ -118,16 +118,16 @@
   </div>
 <!--/ ALERTAS /-->
     <div class="form-group">
-      <input type="text" class="form-control text-warning border-muted text-center" id="mail" name="correo" placeholder="correo electrónico" onblur="confirmarCorreo()" data-toggle="tooltip" title="Escribe un correo electrónico personal">
+      <input type="text" class="form-control text-warning border-muted text-center" id="mail" name="correo"  autocomplete="false" placeholder="correo electrónico" onblur="confirmarCorreo()" data-toggle="tooltip" title="Escribe un correo electrónico personal">
     </div>
       <div class="form-group">
-      <input type="text" class="form-control text-warning border-muted text-center" id="mail2" name="correo" placeholder="confirma tu correo" onblur="confirmarCorreo()" data-toggle="tooltip" title="Vuelve a escribir tu correo electrónico">
+      <input type="text" class="form-control text-warning border-muted text-center" id="mail2" name="correo"  autocomplete="false" placeholder="confirma tu correo" onblur="confirmarCorreo()" data-toggle="tooltip" title="Vuelve a escribir tu correo electrónico">
     </div>
     <div class="form-group">
-    <input type="text" class="form-control text-warning border-muted text-center" id="usr" name="username" placeholder="nombre de usuario" onblur="comprobar()" data-toggle="tooltip" title="elige un nombre de usuario, lo usarás para iniciar sesión">
+    <input type="text" class="form-control text-warning border-muted text-center" id="usr" name="username"  autocomplete="false" placeholder="nombre de usuario" onblur="comprobar()" data-toggle="tooltip" title="elige un nombre de usuario, lo usarás para iniciar sesión">
     </div>
     <div class="form-group">
-      <input type="password" class="form-control text-warning border-muted text-center" onkeypress='return event.charCode >= 48 && event.charCode <= 57' id="pwd" name="password" placeholder="pin de acceso" onblur="comprobar()" maxlength="4" data-toggle="tooltip" title="elige un pin de 4 números para iniciar sesión" >
+      <input type="password" class="form-control text-warning border-muted text-center"  autocomplete="false"  onkeypress='return event.charCode >= 48 && event.charCode <= 57' id="pwd" name="password" placeholder="pin de acceso" onblur="comprobar()" maxlength="4" data-toggle="tooltip" title="elige un pin de 4 números para iniciar sesión" >
     </div>
     <button type="button" onclick="if(document.getElementById('mail').classList.contains('border-warning')){tyc()}else{alert('Ups! Los correos no son iguales')}" class="btn btn-warning text-white text-uppercase"><b>Registrarse</b></button>
   </form>
@@ -209,6 +209,7 @@ function tyc()
 
 function SendForm()
 {
+    document.getElementById('modal-s-btn').setAttribute('send', 1);
     //toma los datos
     var umail = document.getElementById('mail').value;    
     var ulogin = document.getElementById('usr').value;    
@@ -225,6 +226,7 @@ function SendForm()
         document.getElementById('mail').classList.remove("border-danger");
         //enviar datos
         let url = "https://script.google.com/macros/s/AKfycbxJr7WjDsNpRdAEAQqBoMlXeiAj6mV6Zhozr0LU34XURDEb9GF3bVhUbJ94CeeqvS2p/exec?u=root&p=menealacola&func=insert%20usuarios%20(correo,usuario,pin)%20values%20("+umail+","+ulogin+",'"+upwd+")";
+
     var respuesta = httpGet(url);
     if(respuesta!="202"){$('#succesModal').modal();}
     $('#myModal').modal('hide');
