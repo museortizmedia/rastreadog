@@ -331,6 +331,7 @@ function cargarRazas()
                 document.getElementById('inscription').classList.add('d-none');
                 document.getElementById('finish__icon').src = iconfrom(4);
                 changeFavicon(document.getElementById('finish__icon').src);
+                window.localStorage.removeItem('mascotas');
             }else{
                 alert('problem para insertar mascota a la bd');
             }
