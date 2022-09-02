@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <title>RastreaDog | LOGIN</title>
-  <link rel="icon" type="image/png" href="https://museortizmedia.github.io/rastreadog/image/icon/Ronnie.png"/>
+  <title>RegistraDOG | LOGIN</title>
+  <link rel="icon" type="image/png" href="https://museortizmedia.github.io/registradog/image/icon/Ronnie.png"/>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
@@ -37,20 +37,65 @@
 </nav>
     
 <div id="inicio" class="d-flex justify-content-center bg-light align-items-center mt-5">
-<div class="d-flex flex-column rounded bg-white shadow text-center p-5 mt-4 col-lg-6 col-md-8 col-sm-10 col-11">
-<p class="h5 text-left">Escanea o sube el código.</p>
+<div class="d-flex flex-column rounded bg-white shadow text-center p-5 col-lg-6 col-md-8 col-sm-10 col-11">
+
+<span class="mt-5 order-1 order-md-2">
+<p class="h5 text-left">Escanea el código QR de la placa</p>
 <div id="qr-reader" style="width:100%" class="mx-auto m-2"></div>
-<p class="h5 text-left mt-5">Escribe el número de placa de la mascota.</p>
-<div class="input-group row m-2">
+</span>
+
+<span class="mt-5 order-2 order-md-1">
+<p class="h5 text-left">Escribe el número de la placa.</p>
+<a href="#" class="d-block text-left text-muted"><small>¿Dónde lo consigo?</small></a>
+<div class="input-group mx-auto mt-2">
   <input id="placa-text" type="text" class="form-control text-center text-warning" placeholder="A-123456" maxlength="8" >
-  <button type="button" class="btn btn-warning text-white ml-5" onclick="escanerPlacaText(document.getElementById('placa-text').value)">Buscar Placa</button>
+  <button type="button" class="btn btn-warning text-white ml-1" onclick="escanerPlacaText(document.getElementById('placa-text').value)">Buscar Placa</button>
 </div>
+</span>
+
 <div id="qr-reader-results"></div>
+<!--<div id="reader"></div>-->
  
  </div>
 </div>
 
+<!--<script src="https://raw.githubusercontent.com/mebjas/html5-qrcode/master/minified/html5-qrcode.min.js"></script>
+<script type="text/javascript">
+    var cameraId;
+    Html5Qrcode.getCameras().then(cameras => {
+      /**
+        * devices would be an array of objects of type:
+        * { id: "id", label: "label" }
+       */
+       if (devices && devices.length) {
+            cameraId = devices[0].id;
+            // .. use this to start scanning.
+        }
+   }).catch(err => {
+        // handle err   
+});
 
+   const html5QrCode = new Html5Qrcode("reader");
+html5QrCode.start(
+   cameraId, // retreived in the previous step.
+   {
+      fps: 10,    // sets the framerate to 10 frame per second 
+      qrbox: 250  // sets only 250 X 250 region of viewfinder to
+                  // scannable, rest shaded.
+ },
+ qrCodeMessage => {
+     // do something when code is read. For example:
+     console.log(`QR Code detected: ${qrCodeMessage}`);
+ },
+ errorMessage => {
+     // parse error, ideally ignore it. For example:
+     console.log(`QR Code no longer in front of camera.`);
+ })
+ .catch(err => {
+     // Start failed, handle it. For example, 
+     console.log(`Unable to start scanning, error: ${err}`);
+ });
+</script>-->
 
 
 <!-- profile -->
@@ -63,20 +108,20 @@
   
   <div class="card-deck">
   <div class="card" onmouseover="this.classList.add('bg-light')" onmouseout="this.classList.remove('bg-light')">
-    <div class="card-body text-center">
-    <i class="fa fa-venus-mars" aria-hidden="true"></i>
-      <p id="profile-genero" class="card-text">macho</p>
+    <div class="card-body text-center">        
+        <i class="fa fa-venus-mars" aria-hidden="true"></i>
+        <p id="profile-genero" class="card-text">macho</p>      
     </div>
   </div>
   <div class="card" onmouseover="this.classList.add('bg-light')" onmouseout="this.classList.remove('bg-light')">
     <div class="card-body text-center">
-    <i class="fa fa-calendar-o" aria-hidden="true"></i>
+    <i class="fa fa-calendar-o" aria-hidden="true"> Edad</i>
       <p id="profile-edad" class="card-text">2 años</p>
     </div>
   </div>
   <div class="card" onmouseover="this.classList.add('bg-light')" onmouseout="this.classList.remove('bg-light')">
     <div class="card-body text-center">
-    <i class="fa fa-paw" aria-hidden="true"></i>
+    <i class="fa fa-paw" aria-hidden="true"> Raza</i>
       <p id="profile-raza" class="card-text">Sabueso</p>
     </div>
   </div>
@@ -139,6 +184,7 @@ if(placa!=null){
 }
 
 //var resultContainer = document.getElementById('qr-reader-results');
+
 var lastResult, countResults = 0;
 
 function onScanSuccess(decodedText, decodedResult) {
@@ -177,12 +223,21 @@ function InfoMascota(placa){
             //rellenar datos
             document.getElementById('profile-img').src = razainfo[4];
             document.getElementById('profile-pet-name').innerHTML=info[1];
-            document.getElementById('profile-location').innerHTML=" "+duenoinfo[6].replaceAll("/hash/","#").replaceAll("-"," ")+" ";
+            if(duenoinfo[6]!=""){
+                document.getElementById('profile-location').innerHTML=" "+duenoinfo[6].replaceAll("/hash/","#").replaceAll("-"," ")+" ";
+            }else{
+                document.getElementById('profile-location').innerHTML=" Sin dirección registrada";
+            }
             document.getElementById('profile-genero').innerHTML=tipo+" "+info[6];
-            var edad = info[3]+info[4]; edad = edad.toString().split("-")[2]; 
-            edad = new Date().getFullYear().toString().slice(-2) - (info[2]+""+info[3]).split('T')[0].split('-')[2];
-
-            document.getElementById('profile-edad').innerHTML = edad+" años de edad";
+            var edad ="0 años de edad";
+            if(info[2]!="")
+            {
+                edad  = (info[2]+info[3]).split("T")[0].split("-")[0];
+            }else{
+                edad  = (info[2]+info[3]).split("T")[0].split("/")[2];
+            }
+            edad = new Date().getFullYear().toString() - edad;
+            document.getElementById('profile-edad').innerHTML = edad+" años";
             document.getElementById('profile-raza').innerHTML = razainfo[1];
             document.getElementById('profile-dueno-nombre').innerHTML = duenoinfo[0].replaceAll("-"," ")+" "+duenoinfo[1].replaceAll("-"," ");
             document.getElementById('profile-dueno-correo').innerHTML = duenoinfo[7];
@@ -204,7 +259,6 @@ function InfoMascota(placa){
         
         
     }else{
-        console.log('placa inexistente');
         document.getElementById('qr-reader').classList.remove("d-none");
         document.getElementById('qr-reader-results').innerHTML = "<b class='text-danger'>no se encontró la placa. Inténtalo nuévamente</b>";
     }

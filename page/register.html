@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <title>RastreaDog | REGÍSTRATE</title>
-  <link rel="icon" type="image/png" href="https://museortizmedia.github.io/rastreadog/image/icon/Ronnie.png"/>
+  <title>RegistraDOG | REGÍSTRATE</title>
+  <link rel="icon" type="image/png" href="https://museortizmedia.github.io/registradog/image/icon/Ronnie.png"/>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
@@ -88,21 +88,21 @@
 <!-- The Modal -->
 
 <!-- The Modal -->
-  <div class="modal fade" id="succesModal">
+  <div class="modal fade" id="succesModal" style="margin-top:15%">
     <div class="modal-dialog modal-sm">
       <div class="modal-content">      
         <!-- Modal Header -->
         <div class="modal-header">
-          <h4 class="modal-title text-warning">¡REGISTRO EXITOSO!</h4>
+          <h4 class="modal-title text-warning text-center w-100">¡REGISTRO EXITOSO!</h4>
         </div>
         
         <!-- Modal body -->
         <div class="modal-body text-left text-muted">
-            <p>Te enviamos un correo electrónico para que confirmes tu cuenta. Revisa la bandeja de tu correo electrónico e inicia sesión.</p>
+            <p>Te enviamos un correo electrónico para que confirmes tu cuenta. Revisa la bandeja entrada y la bandeja de spam de tu correo electrónico antes de iniciar sesión.</p>
         </div>
         <!-- Modal footer -->
         <div class="modal-footer d-flex justify-content-center text-center">
-                <button type="button" class="btn btn-warning text-white" onclick="window.location.replace('login.html');">ACEPTAR</button>
+                <button type="button" class="btn btn-warning text-white" onclick="window.location.replace('login.html');">Listo. Déjame entrar</button>
         </div>
 
       </div>
@@ -118,128 +118,24 @@
   </div>
 <!--/ ALERTAS /-->
     <div class="form-group">
-      <input type="text" class="form-control text-warning border-muted text-center" id="mail" name="correo"  autocomplete="desactivado" placeholder="correo electrónico" onblur="confirmarCorreo()" data-toggle="tooltip" title="Escribe un correo electrónico personal">
+      <input type="text" class="form-control text-warning border-muted text-center" id="mail" name="correo"  autocomplete="false" placeholder="correo electrónico" onblur="confirmarCorreo()" data-toggle="tooltip" title="Escribe un correo electrónico personal">
     </div>
       <div class="form-group">
-      <input type="text" class="form-control text-warning border-muted text-center" id="mail2" name="correo"  autocomplete="desactivado" placeholder="confirma tu correo" onblur="confirmarCorreo()" data-toggle="tooltip" title="Vuelve a escribir tu correo electrónico">
+      <input type="mail" class="form-control text-warning border-muted text-center" id="mail2" name="correo"  autocomplete="false" placeholder="confirma tu correo" onblur="confirmarCorreo()" data-toggle="tooltip" title="Vuelve a escribir tu correo electrónico">
     </div>
     <div class="form-group">
-    <input type="text" class="form-control text-warning border-muted text-center" id="usr" name="username"  autocomplete="desactivado" placeholder="nombre de usuario" onblur="comprobar()" data-toggle="tooltip" title="elige un nombre de usuario, lo usarás para iniciar sesión">
+    <input type="mail" class="form-control text-warning border-muted text-center" id="usr" name="username"  autocomplete="false" placeholder="nombre de usuario" onblur="comprobar()" data-toggle="tooltip" title="elige un nombre de usuario, lo usarás para iniciar sesión">
     </div>
     <div class="form-group">
-      <input type="password" class="form-control text-warning border-muted text-center"  autocomplete="desactivado"  onkeypress='return event.charCode >= 48 && event.charCode <= 57' id="pwd" name="password" placeholder="pin de acceso" onblur="comprobar()" maxlength="4" data-toggle="tooltip" title="elige un pin de 4 números para iniciar sesión" >
+      <input type="password" class="form-control text-warning border-muted text-center"  autocomplete="false"  onkeypress='return event.charCode >= 48 && event.charCode <= 57' id="pwd" name="password" placeholder="pin de acceso" onblur="comprobar()" maxlength="4" data-toggle="tooltip" title="elige un pin de 4 números para iniciar sesión" >
     </div>
     <button type="button" onclick="if(document.getElementById('mail').classList.contains('border-warning')){tyc()}else{alert('Ups! Los correos no son iguales')}" class="btn btn-warning text-white text-uppercase"><b>Registrarse</b></button>
   </form>
 </div>
 </div>
 
-<script>
-    
-
-function confirmarCorreo()
-{
-	if((document.getElementById('mail').value!="" || document.getElementById('mail2').value!="")&&document.getElementById('mail').value==document.getElementById('mail2').value)
-    {
-        document.getElementById('mail').classList.add("border-warning");
-        document.getElementById('mail2').classList.add("border-warning");        
-        document.getElementById('mail').classList.add("text-warning");
-        document.getElementById('mail2').classList.add("text-warning");
-
-        document.getElementById('mail').classList.remove("border-danger");
-        document.getElementById('mail2').classList.remove("border-danger");
-        document.getElementById('mail').classList.remove("text-danger");     
-        document.getElementById('mail2').classList.remove("text-danger");
-    }
-    else
-    {
-        document.getElementById('mail').classList.add("border-danger");
-        document.getElementById('mail2').classList.add("border-danger");
-        document.getElementById('mail').classList.add("text-danger");
-        document.getElementById('mail2').classList.add("text-danger");
-        document.getElementById('mail').classList.remove("border-warning");        
-        document.getElementById('mail2').classList.remove("border-warning");
-        document.getElementById('mail').classList.remove("text-warning");        
-        document.getElementById('mail2').classList.remove("text-warning");
-        
-    }
-}
-function comprobar()
-{
-    if(document.getElementById('usr').value!="") 
-        {
-            document.getElementById('usr').classList.add("border-warning");
-            document.getElementById('usr').classList.add("text-warning");
-            document.getElementById('usr').classList.remove("border-muted");
-            document.getElementById('usr').classList.remove("text-muted");
-        }else{
-            document.getElementById('usr').classList.remove("border-warning");
-            document.getElementById('usr').classList.remove("text-warning");
-            document.getElementById('usr').classList.add("border-muted");
-            document.getElementById('usr').classList.add("text-muted");
-        }
-    if(document.getElementById('pwd').value!="")
-        {
-            document.getElementById('pwd').classList.add("border-warning");
-            document.getElementById('pwd').classList.add("text-warning");
-            document.getElementById('pwd').classList.remove("border-muted");
-            document.getElementById('pwd').classList.remove("text-muted");
-        }else{
-            document.getElementById('pwd').classList.remove("border-warning");
-            document.getElementById('pwd').classList.remove("text-warning");
-            document.getElementById('pwd').classList.add("border-muted");
-            document.getElementById('pwd').classList.add("text-muted");
-        }
-}
-
-function tyc()
-{
-    //vadidacion de campos
-    var umail = document.getElementById('mail').value;    
-    var ulogin = document.getElementById('usr').value;    
-    var upwd = document.getElementById('pwd').value;
-    
-    if(umail.length==0 || ulogin.length==0 || upwd.length==0){alert("Oye, necesito todos los datos para seguir :c");return;}
-
-    $("#checkTyC").change(function() {
-        document.getElementById("modal-s-btn").classList.toggle("disabled");
-});
-    $('#myModal').modal();    
-}
-
-function SendForm()
-{
-    document.getElementById('modal-s-btn').setAttribute('send', 1);
-    //toma los datos
-    var umail = document.getElementById('mail').value;    
-    var ulogin = document.getElementById('usr').value;    
-    var upwd = document.getElementById('pwd').value;
-        //elimina los datos de los campos de texto    
-    	document.getElementById('mail').value = "";
-        document.getElementById('mail2').value = "";
-    	document.getElementById('usr').value = "";
-    	document.getElementById('pwd').value = "";
-        //retomar aspecto
-        document.getElementById('mail2').classList.add("border-warning");
-    	document.getElementById('mail2').classList.remove("border-danger");
-    	document.getElementById('mail').classList.add("border-warning");
-        document.getElementById('mail').classList.remove("border-danger");
-        //enviar datos
-        let url = "https://script.google.com/macros/s/AKfycbxJr7WjDsNpRdAEAQqBoMlXeiAj6mV6Zhozr0LU34XURDEb9GF3bVhUbJ94CeeqvS2p/exec?u=root&p=menealacola&func=insert%20usuarios%20(correo,usuario,pin)%20values%20("+umail+","+ulogin+",'"+upwd+")";
-
-    var respuesta = httpGet(url);
-    if(respuesta!="202"){$('#succesModal').modal();}
-    $('#myModal').modal('hide');
-}
-function httpGet(theUrl)
-{
-    var xmlHttp = new XMLHttpRequest();
-    xmlHttp.open( "GET", theUrl, false );
-    xmlHttp.send( null );
-    var respuesta=xmlHttp.response;
-    const res = JSON.parse(respuesta.toString());
-    return res;
-}
-</script>
 </body>
+<script src="../js/bd_config.js"></script>
+<script src="../js/main.js"></script>
+<script src="../js/register.js"></script>
 </html>

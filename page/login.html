@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <title>RastreaDog | LOGIN</title>
-  <link rel="icon" type="image/png" href="https://museortizmedia.github.io/rastreadog/image/icon/Ronnie.png"/>
+  <title>RegistraDOG | LOGIN</title>
+  <link rel="icon" type="image/png" href="https://museortizmedia.github.io/registradog/image/icon/Ronnie.png"/>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
@@ -74,144 +74,25 @@
 <img class="w-100" src="../image/portada-ln.png">
 <!--/ ALERTAS /-->
 <div id="error" class="alert alert-danger alert-dismissible fade show mt-2 d-none">
-    <strong><i class="fa fa-exclamation-circle" aria-hidden="true"></i> No reconozco este olor :c</strong><br> ¿Escribiste tu usuario, correo o pin correctamente?<br><small class="text-muted">Primero confirma tu cuenta con el correo que enviamos a tu mail.</small><br><small class="text-muted">también puedes registrarte <a href="register.html">aquí</a> o presiona <a href="#" onclick="recuperarPin()">aquí</a> para recuperar tu pin.</small>
+    <strong><i class="fa fa-exclamation-circle" aria-hidden="true"></i> No reconozco este olor :c</strong><br> ¿Escribiste tu usuario, correo o pin correctamente?<br><small class="text-muted">también puedes registrarte <a href="register.html">aquí</a> o presiona <a href="#" onclick="recuperarPin()">aquí</a> para recuperar tu pin.</small>
   </div>
 <!--/ ALERTAS /-->
     <div class="form-group">
       <input type="text" class="form-control text-warning border-muted text-center" id="access" name="access" placeholder="usuario o correo electrónico" onblur="comprobar()">
     </div>
     <div class="form-group">
-      <input type="password" class="form-control text-warning border-muted text-center" onkeypress='return event.charCode >= 48 && event.charCode <= 57' id="pwd" name="password" placeholder="pin de acceso" onblur="comprobar()" maxlength="4" onkeyup="if(event.keyCode===13){ if(document.getElementById('access').value!=''){inicio();} }else if(this.value.length>=4){document.getElementById('btn_login').classList.remove('disabled');}else{document.getElementById('btn_login').classList.add('disabled');}">
+      <input type="password" class="form-control text-warning border-muted text-center" onkeypress='return event.charCode >= 48 && event.charCode <= 57' id="pwd" name="password" placeholder="pin de acceso" onblur="comprobar()" maxlength="4" nkeyup="if(event.keyCode===13){ if(document.getElementById('access').value!=''){inicio();} }else if(this.value.length>=4){document.getElementById('btn_login').classList.remove('disabled');}else{document.getElementById('btn_login').classList.add('disabled');}">
     </div>
-    <button id="btn_login" type="button" onclick="inicio()" style="cursor: default;" class="btn btn-warning mt-5 text-white text-uppercase disabled"><b>Iniciar Sesión</b></button>
+    <button id="btn_login" type="button" onclick="this.children[1].classList.remove('d-none');inicio();" style="cursor: default;" class="btn btn-warning mt-5 text-white text-uppercase disabled">
+        <b>Iniciar Sesión</b>
+        <span class="d-none"><i class="fa fa-circle-o-notch fa-spin fa-lg fa-fw"></i></span>
+    </button>
   </form>
   <a class="mt-2 text-muted" style="cursor:pointer;" onclick="recuperarPin()">¿Olvidaste tu pin?</a>
 </div>
 </div>
-
-<script>
-    function comprobar()
-    {
-        document.getElementById('error').classList.add("d-none");
-        if(document.getElementById('access').value!="") 
-        {
-            document.getElementById('access').classList.add("border-warning");
-            document.getElementById('access').classList.add("text-warning");
-            document.getElementById('access').classList.remove("border-muted");
-            document.getElementById('access').classList.remove("text-danger");
-            document.getElementById('access').classList.remove("border-danger");
-        }else{
-            document.getElementById('access').classList.remove("border-warning");
-            document.getElementById('access').classList.add("border-muted");
-        }
-        if(document.getElementById('pwd').value!="")
-        {
-            document.getElementById('pwd').classList.add("border-warning");
-            document.getElementById('pwd').classList.add("text-warning");
-            document.getElementById('pwd').classList.remove("border-muted");
-            document.getElementById('pwd').classList.remove("text-danger");
-            document.getElementById('pwd').classList.remove("border-danger");
-        }else{
-            document.getElementById('pwd').classList.remove("border-warning");
-            document.getElementById('pwd').classList.add("border-muted");
-        }
-        //encender boton
-        if(document.getElementById('pwd').value.length==4&&document.getElementById('access').value!=""){
-            document.getElementById('btn_login').classList.remove('disabled');
-            document.getElementById('btn_login').style="";
-        }else{
-            document.getElementById('btn_login').classList.add('disabled');
-            document.getElementById('btn_login').style="cursor: default";
-        }
-    }
-function inicio()
-{
-    var umail = document.getElementById('access').value;
-    var upwd = document.getElementById('pwd').value;
-    if((umail==""||upwd=="")||upwd.length<4){console.log('error no controlado'); return;}
-    
-    var consultauser = httpGet("https://script.google.com/macros/s/AKfycbxJr7WjDsNpRdAEAQqBoMlXeiAj6mV6Zhozr0LU34XURDEb9GF3bVhUbJ94CeeqvS2p/exec?u=root&p=menealacola&func=select%20(correo,usuario,pin)%20from%20usuarios%20where%20keymail="+umail+upwd);
-    if(consultauser[0]!="200")
-    {
-        consultauser = httpGet("https://script.google.com/macros/s/AKfycbxJr7WjDsNpRdAEAQqBoMlXeiAj6mV6Zhozr0LU34XURDEb9GF3bVhUbJ94CeeqvS2p/exec?u=root&p=menealacola&func=select%20(correo,usuario,pin)%20from%20usuarios%20where%20keyuser="+umail+upwd);
-        if(consultauser[0]!="200"){
-        document.getElementById('access').classList.remove("border-warning");
-        document.getElementById('access').classList.remove("text-warning");
-        document.getElementById('access').classList.add("border-danger");
-        document.getElementById('access').classList.add("text-danger");
-        document.getElementById('pwd').classList.remove("border-warning");
-        document.getElementById('pwd').classList.remove("text-warning");
-        document.getElementById('pwd').classList.add("border-danger");
-        document.getElementById('pwd').classList.add("text-danger");
-        document.getElementById('error').classList.remove("d-none");
-        return;
-        }
-    }
-
-    document.getElementById('access').value="";
-    document.getElementById('pwd').value="";
-    pk=consultauser[1].toString().split(",")[0];
-    iniciarsesion(pk);
-}
-function iniciarsesion(pk)
-{
-    //alert('sesion de '+pk);
-    var localStorade = window.localStorage;
-    var tryuserinfo = httpGet("https://script.google.com/macros/s/AKfycbxJr7WjDsNpRdAEAQqBoMlXeiAj6mV6Zhozr0LU34XURDEb9GF3bVhUbJ94CeeqvS2p/exec?u=root&p=menealacola&func=select%20(nombres,apellidos)%20from%20duenos%20where%20usuario_correo="+pk);
-    if(tryuserinfo[0]=="200")
-    {
-        var userinfo = tryuserinfo[1];
-        localStorage.clear();
-        localStorage.setItem('u_correo', pk);
-        localStorage.setItem('nombre', userinfo[0][0].split("-")[0]+" "+userinfo[0][1].split("-")[0]);
-        localStorage.setItem('virgen',false);
-        window.location.replace("../index.html");
-    }
-    else
-    {
-        //no hay info del usuario - primer acceso
-        localStorage.clear();
-        localStorage.setItem('u_correo', pk);
-        localStorage.setItem('virgen',true);
-        window.location.replace("../index.html");
-    }
-    
-    
-}
-function recuperarPin() {
-    $('#modal').modal();
-}
-function recuperarPin_buscarmail(mail)
-{
-    if(mail==""){document.getElementById('modal-mail').classList.add('border-danger');}
-    if (/^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i.test(mail)){
-   document.getElementById('modal-mail').classList.add('border-success');
-   document.getElementById('modal-mail').classList.remove('border-danger');
-   //buscar mail
-   const url = "https://script.google.com/macros/s/AKfycbxJr7WjDsNpRdAEAQqBoMlXeiAj6mV6Zhozr0LU34XURDEb9GF3bVhUbJ94CeeqvS2p/exec?u=root&p=menealacola";
-   var trymailrecovery = httpGet(url+"&func=select%20*%20from%20usuarios%20where%20correo="+mail);
-   if(trymailrecovery[0]!="200"){
-    document.getElementById('modal-content').innerHTML = "No encontramos este correo, inténtalo con otro";
-       document.getElementById('modal-mail').classList.remove('border-success');
-   document.getElementById('modal-mail').classList.add('border-danger');
-   }else
-   {
-    httpGet(url+"&pinrecover="+document.getElementById('modal-mail').value);
-    document.getElementById('modal-content').innerHTML = "¡Listo! Hemos enviado tu nuevo pin a tu correo electrónico";
-   }
-  } else {
-   document.getElementById('modal-mail').classList.add('border-danger');
-  }
-}
-function httpGet(theUrl)
-{
-    var xmlHttp = new XMLHttpRequest();
-    xmlHttp.open( "GET", theUrl, false );
-    xmlHttp.send( null );
-    var respuesta=xmlHttp.response;
-    const res = JSON.parse(respuesta.toString());
-    return res;
-}
-</script>
 </body>
+<script src="../js/bd_config.js"></script>
+<script src="../js/main.js"></script>
+<script src="../js/login.js"></script>
 </html>

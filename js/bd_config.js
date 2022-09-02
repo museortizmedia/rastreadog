@@ -1,0 +1,2 @@
+const db_u = 'root', db_c='menealacola',db_url='https://script.google.com/macros/s/AKfycbxJr7WjDsNpRdAEAQqBoMlXeiAj6mV6Zhozr0LU34XURDEb9GF3bVhUbJ94CeeqvS2p/exec';
+//<script src="./js/bd_config.js"></script>
