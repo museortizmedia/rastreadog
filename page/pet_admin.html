@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <title>RegistraDOG | TUS MASCOTAS</title>
+  <link rel="icon" type="image/png" href="https://museortizmedia.github.io/registradog/image/icon/Ronnie.png"/>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@700&display=swap" rel="stylesheet">
+</head>
+<body onload="iniciar_admin_pet()">
+
+<nav class="navbar shadow navbar-expand-sm bg-dark navbar-light bg-white" style="height:13vh;z-index: 9999;">
+    <div class="container text-dark">
+
+    <img src="../image/logo/isotipo.png" style="width:70px;cursor: pointer;" onclick="window.open('../index.html','_self')">
+        <div class="nav-text d-none d-sm-block p-3" id="NavUsername" style="font-family: 'Baloo 2', cursive;font-size: 35px;color:#004040">RegistraD<span style="color:#fc9436">O</span>G</div>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar"><span class="navbar-toggler-icon"></span></button>
+
+
+
+        <div class="collapse navbar-collapse justify-content-end" id="collapsibleNavbar">
+            <ul class="navbar-nav p-3">
+                <li id="btn_escogerM" class="nav-item mr-3 my-auto d-none">
+                    <div class="dropdown dropleft float-right">
+                        <button type="button" class="btn btn-warning text-white dropdown-toggle" data-toggle="dropdown">
+                              Escoge tu mascota
+                        </button>
+                        <div id="dpmenu_mascotas" class="dropdown-menu">
+                            <!--<a class="dropdown-item text-muted" href="page/register_pet.html">añadir una mascota</a>-->
+                            <a class="dropdown-item text-muted" href="page/pet_admin.html">administrar tus mascotas</a>
+                        </div>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark" href="../index.html" data-toggle="tooltip" title="Volver al Inicio"><i class="fa fa-home" aria-hidden="true"></i> Volver</a>
+                </li>
+            </ul>
+        </div>
+</div>
+</nav>
+
+<style type="text/css">
+    .list-group .active{
+        
+            background: #ffc107!important;
+            border-color: #f0ad4e!important;
+        
+
+    }
+</style>
+
+<div class="col-10 mx-auto mt-5">
+    <h3 class="text-warning">Tus mascotas</h3>
+    <p class="text-muted">Aqui verás un resumen de tus mascotas registradas. Si quieres registrar una nueva presiona el botón amarillo de abajo.</p>
+<div class="overflow-auto bg-light p-2" style="height:60vh">
+<div id="board" class="list-group">
+
+<!-- -->
+<div id="msg" class="text-center text-muted"><b>Buscando tus mascotas...</b></div>
+
+</div>
+</div>
+<div class="m-3 justify-content-rigth">
+    <i id="btn_borrar" usable="false" style="cursor:auto;text-shadow: #CCC 1px 0 10px;" onclick="if(selec.length>0){buscar_seleccion();}" class="fa fa-trash fa-2x text-muted" aria-hidden="true"></i>
+    <a type="button" class="btn btn-warning text-white float-right mb-2" href="register_pet.html">Nueva Mascota</a>
+    <a type="button" class="btn btn-secondary text-white mr-2 float-right" onclick="actualizarMascotas()">Cargar al Menu de mascotas</a>    
+</div>
+
+</div>
+
+<script type="text/javascript">
+
+var localStorade = window.localStorage;
+var name = localStorage.getItem('nombre');
+var u_correo = localStorade.getItem('u_correo');
+var u_id = localStorade.getItem('u_id');
+
+var selec=[];
+function iniciar_admin_pet()
+{    
+    if(name!=null){
+    document.getElementById('NavUsername').innerHTML = name;
+    document.getElementById('NavUsername').classList.add("text-uppercase");}
+    else{window.location.replace("../index.html");}
+
+    cargarMascotasBoard();
+}
+function cargarMascotasBoard()
+{
+  let consultamascotas = "https://script.google.com/macros/s/AKfycbxJr7WjDsNpRdAEAQqBoMlXeiAj6mV6Zhozr0LU34XURDEb9GF3bVhUbJ94CeeqvS2p/exec?u=root&p=menealacola&func="+("select (nombre,fecha_nacimiento,mes_año,género,placa,icon) from mascotas where id_dueño="+u_id).replaceAll(" ","%20");
+  var request = httpGet(consultamascotas);
+  if(request[0]=="200")
+  {
+    request = request[1];
+    for (var i = 0; i <= request.length-1; i++) {
+        var datos = request[i].toString().split(",");
+        var fecha = datos[1]!=""? datos[1].split("T")[0] : datos[2].toString().split("01/")[1];
+        var icon = datos[3]=="macho"? datos[5]+"_happy.png":datos[5]+"_girl.png";
+        document.getElementById('board').insertAdjacentHTML("beforeend",
+        "<a placa='"+datos[4]+"' class='list-group-item list-group-item-action' style='cursor: default'><div class='d-flex w-100 justify-content-between'><div><input type='checkbox' id='defaultCheck'  class='mr-2' onclick='if(this.parentElement.parentElement.parentElement.classList.contains(\"active\")){selec.splice(selec.indexOf(\""+datos[4]+"\"),1);if(selec==0){desactivarborrar();}}else{selec.push(\""+datos[4]+"\");activarborrar();}this.parentElement.parentElement.parentElement.classList.toggle(\"active\");'><img src='../image/icon/"+icon+"' style='width:60px' class='ml-5'></div><div class='btn-group w-75'><button class='btn text-muted' style='cursor: default;''><b>"+datos[0]+"</b></button><button class='btn text-muted' style='cursor: default;'><b>"+fecha+"</b></button><button class='btn text-muted text-capitalize' style='cursor: default;'><b>"+datos[3]+"</b></button><button class='btn text-muted' style='cursor: default;'><b>"+datos[4]+"</b></button></div></div></a>"
+        );
+        document.getElementById('msg').classList.add('d-none');
+    }
+  }else{if(request[0]=="500"){
+    document.getElementById('msg').classList.add('d-none');
+    document.getElementById('board').insertAdjacentHTML("beforeend","<b class='text-muted mx-auto'>No tienes mascotas registradas. <a href='register_pet.html'>¡Hazlo ahora!</a> c:</b>");}
+    //alert(request);
+}
+}
+function actualizarMascotas()
+{
+    let consultamascotas = "https://script.google.com/macros/s/AKfycbxJr7WjDsNpRdAEAQqBoMlXeiAj6mV6Zhozr0LU34XURDEb9GF3bVhUbJ94CeeqvS2p/exec?u=root&p=menealacola&func="+("select (nombre,placa) from mascotas where id_dueño="+u_id).replaceAll(" ","%20");
+    var request = httpGet(consultamascotas);
+    if(request[0]=="200"){
+    localStorade.setItem('mascotas',JSON.stringify(request[1]));
+    //cargar en el menu
+    for (var i = 0; i <= request[1].length-1; i++) {
+        var element = document.createElement("a");
+        element.classList.add('dropdown-item');
+        element.setAttribute('style','cursor:pointer;')
+        var text = document.createTextNode(request[1][i][0].replaceAll("-"," "));
+        element.appendChild(text);
+        document.getElementById('dpmenu_mascotas').appendChild(element);
+    }
+    document.getElementById("btn_escogerM").classList.remove('d-none');
+    }
+}
+function activarborrar()
+{
+    document.getElementById('btn_borrar').classList.remove('text-muted');
+    document.getElementById('btn_borrar').classList.add('text-warning');
+    document.getElementById('btn_borrar').setAttribute('style','cursor:pointer;text-shadow: #CCC 1px 0 10px;');
+    document.getElementById('btn_borrar').setAttribute('usable',true);
+}
+function desactivarborrar()
+{
+    document.getElementById('btn_borrar').classList.remove('text-warning');
+    document.getElementById('btn_borrar').classList.add('text-muted');
+    document.getElementById('btn_borrar').setAttribute('style','cursor:auto;text-shadow: #CCC 1px 0 10px;');
+    document.getElementById('btn_borrar').setAttribute('usable',false);
+}
+function buscar_seleccion()
+{
+    if(selec.length>2){
+        //alerta de eliminación
+    }
+    var deletemascota = "https://script.google.com/macros/s/AKfycbxJr7WjDsNpRdAEAQqBoMlXeiAj6mV6Zhozr0LU34XURDEb9GF3bVhUbJ94CeeqvS2p/exec?u=root&p=menealacola&func="+("update mascotas set id_dueño= where placa=").replaceAll(" ","%20");
+    for (var i = 0; i <= selec.length-1; i++)
+    {
+        deletemascota+=selec[i];
+        var request = httpGet(deletemascota);
+    if(request[0]=="200"){location.reload();}
+
+    }
+}
+    function httpGet(theUrl)
+    {
+        var xmlHttp = new XMLHttpRequest();
+        xmlHttp.open( "GET", theUrl, false );
+        xmlHttp.send( null );
+        var respuesta=xmlHttp.response;
+        const res = JSON.parse(respuesta.toString());
+        return res;
+    }
+</script>
+</body>
+</html>

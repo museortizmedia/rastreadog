@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <title>RegistraDOG</title>
+  <link rel="icon" type="image/png" href="https://museortizmedia.github.io/registradog/image/icon/Ronnie.png"/>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@700&display=swap" rel="stylesheet">
+</head>
+<body onload="iniciar_register_pet()">
+
+<nav class="navbar shadow navbar-expand-sm bg-dark navbar-light bg-white" style="height:13vh;z-index: 9999;">
+    <div class="container text-dark">
+
+    <img src="../image/logo/isotipo.png" style="width:70px;cursor: pointer;" onclick="window.open('../index.html','_self')">
+        <div class="nav-text d-none d-sm-block p-3" id="NavUsername" style="font-family: 'Baloo 2', cursive;font-size: 35px;color:#004040">RegistraD<span style="color:#fc9436">O</span>G</div>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar"><span class="navbar-toggler-icon"></span></button>
+
+
+
+        <div class="collapse navbar-collapse justify-content-end" id="collapsibleNavbar">
+            <ul class="navbar-nav p-3">
+                <li class="nav-item">
+                    <a class="nav-link text-dark" href="../index.html" data-toggle="tooltip" title="Volver al Inicio"><i class="fa fa-home" aria-hidden="true"></i> Volver</a>
+                </li>
+            </ul>
+        </div>
+</div>
+</nav>
+
+<style type="text/css">
+    .custom-select,
+    .form-control{
+        background-color: rgba(255, 255, 255, 0.18)!important;
+        border-radius: 25px!important;
+        border-style: none;
+        color: white!important;
+    }
+    ::placeholder {
+        color: rgba(255,255,255,0.5)!important;
+    }
+    form .btn{
+        color: #f0ad4e!important;
+    }
+    .custom-select{color: dimgrey!important;}
+    .btn {border-radius: 25px!important;}
+    input:invalid {
+  border: red solid 3px;
+}
+    .clicleable{
+        cursor: pointer;
+    }
+</style>
+
+<div class="container d-flex justify-content-center align-items-center mt-5" style="height: 90vh;"> 
+<div id="inscription" class="col mt-5">
+    <div class="p-5 w-75 shadow mx-auto text-center" style="background: rgb(234,166,23); background: linear-gradient(152deg, rgba(234,166,23,1) 0%, rgba(228,141,14,1) 100%, rgba(253,191,90,1) 100%);border-radius:25px;">
+        <div class="row justify-content-center" style="position: absolute;left: 0; right: 0; margin: auto; top: -85px;width: 100%;">
+            <i id="iconCL" class="fa fa-chevron-left fa-lg my-auto clicleable d-non" aria-hidden="true" onclick="cambiarAvatar(false)"></i>
+            <div>
+                <span id="icon_name" class="d-block"><span style="font-family: 'Baloo 2', cursive;color:#004040">¿?</span></span>
+                <img id="icon" class="d-block mx-auto" src="https://museortizmedia.github.io/registradog/image/icon/unlock.png" width="150px">
+            </div>
+            <i id="iconCR" class="fa fa-chevron-right fa-lg my-auto clicleable d-non" aria-hidden="true" onclick="cambiarAvatar(true)"></i>
+        </div>
+
+        <div style="height:350px">
+            <h3 id="inscription__title" class="text-white mt-5">¡Un nuevo miembro de la familia!</h3>
+            <p id="inscription__text" class="text-white mb-3">Cuéntanos un poco sobre tu mascota</p>
+
+            
+            <div id="inscription__s_1" class="w-75" style="height:130px;margin: auto;">
+                <div class="row">
+                <select id="tipo" class="custom-select mb-4 col shadow text-center text-white" onchange="
+                document.getElementById('otro_tipo').classList.add('d-none');
+                document.getElementById('raza').classList.add('d-none');
+                document.getElementById('icon_name').innerHTML=myicon;
+                switch (document.getElementById('tipo').value) {
+          case '1':
+          changeIcon(iconfrom(1));
+          document.getElementById('raza').classList.remove('d-none');
+            break;
+          case '2':
+          changeIcon(iconfrom(3));
+          document.getElementById('raza').classList.remove('d-none');
+            break;
+            case '3':
+          changeIcon(iconfrom(5));
+          document.getElementById('otro_tipo').classList.remove('d-none');
+          document.getElementById('img-pet').classList.add('d-none');
+            break;
+          default:
+          changeIcon('https://museortizmedia.github.io/rastreadog/image/icon/unlock.png');
+          document.getElementById('icon_name').innerHTML='';
+        }
+        
+        cargarRazas();
+                ">
+                    <option value="default">¿Especie?</option>
+                    
+                </select>
+<!--document.getElementById('img-pet').src=''-->
+                <select id="raza" onchange="
+                document.getElementById('img-pet').src=document.getElementById('raza').options[document.getElementById('raza').selectedIndex].getAttribute('imagen');" class="custom-select ml-2 mb-2 col text-center text-white d-none">
+                <option value="default">¿Raza?</option>
+                
+                </select>
+            <input type="text" class="form-control col ml-2 mb-2 shadow text-center text-warning d-none" id="otro_tipo" placeholder="¿De qué especie es tu mascota?" autocomplete="off">
+            <input type="text" class="form-control shadow text-center text-warning" id="nombre" placeholder="¿Cómo se llama?" autocomplete="off">
+                </div>
+            </div>
+
+ 
+            <div id="inscription__s_2" class="w-75 d-none" style="height:130px;margin: auto;">                
+                <label class="text-white" for="cumple">Fecha de nacimiento</label>
+                <div class="row"><input class="form-control shadow text-center" type="text" placeholder="dd/mm/aaaa" maxlength="10" pattern="^[0-9]{2}\/[0-9]{2}\/[0-9]{4}" id="cumple" onkeypress='return event.charCode >= 47 && event.charCode <= 57' autocomplete="off">
+                <input class="form-control shadow text-center d-none" type="text" placeholder="mm/aaaa" id="mes_ano" onkeypress='return event.charCode >= 47 && event.charCode <= 57' maxlength="7" pattern="^[0-9]{2}\/[0-9]{4}" autocomplete="off"></div>
+
+                <div class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" id="fecha">
+                <label class="custom-control-label mt-2 text-white" for="fecha">No conozco la fecha</label>
+                </div>  
+            </div>
+
+
+            <div id="inscription__s_3" class="w-75 d-none" style="height:130px;margin: auto;">
+                <input type="text" class="form-control mb-4 shadow text-center text-warning" id="peso" placeholder="peso en kg" onkeypress='return event.charCode >= 46 && event.charCode <= 57' maxlength="2" autocomplete="off">
+
+                <select id="sexo" class="custom-select shadow text-center text-white">
+                <option value="default" selected>Sexo biológico</option>
+                <option value="macho">Macho</option>
+                <option value="hembra">Hembra</option>
+                </select>
+            </div>
+
+
+            <div id="inscription__s_4" class="w-75 d-none" style="height:130px;margin: auto;">
+                <input type="text" class="form-control shadow text-center text-warning" id="chip" placeholder="# chip (opcional)" onkeypress='return event.charCode >= 48  && event.charCode <= 57' autocomplete="off">
+            </div>
+
+            <div class="row w-100 mx-auto justify-content-sm-between" style="height:150px">
+
+              <button id="btnBack" class="btn btn-light text-warning disabled m-2 my-auto" onclick="nextOrBack(false, currentSlide)"><b>< <span class="d-none d-sm-inline">atrás</span></b></button>
+
+              <div class="mx-auto my-auto mt-3 bg-transparent d-none d-md-block" style="display:flex;">
+    <img id="img-pet" src="../image/icon/unlock.png" class="d-none shadow" style="object-fit:cover;border-radius:65px;width:130px;height:130px;" onError="this.onerror=null;this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/Coat_types_3.jpg/800px-Coat_types_3.jpg';"> <!---->
+</div>
+              <button id="btnNext" class="btn btn-light text-warning m-2 my-auto" onclick="nextOrBack(true, currentSlide)"><b><span class="d-none d-sm-inline">siguiente</span> ></b></button>
+            </div>
+    </div>
+
+
+
+</div>
+</div>
+
+    <div id="finish" class="p-3 h-75 w-75 shadow text-center d-none" style="background: rgb(234,166,23); background: linear-gradient(152deg, rgba(234,166,23,1) 0%, rgba(228,141,14,1) 100%, rgba(253,191,90,1) 100%);border-radius: 25px;margin: auto;">        
+        <div id="finish__body" class="w-75 my-auto" style="height:270px;margin: auto;">
+            <img id="finish__icon" src="../image/icon/unlock.png" height="60%">
+            <h3 class="text-white">¡Tu mascota ya hace parte de la familia!</h3>
+            <p class="text-white">Revisa tu correo electrónico para recibir la placa de tu mascota, también puedes editar tu información de contacto e instalar la aplicación.</p>
+            <a class="text-white" href="../index.html"><i class="fa fa-home" aria-hidden="true"></i> Volver</a>
+        </div>
+    </div>
+
+
+<script type="text/javascript">
+$("#fecha").change(function() {
+        document.getElementById("mes_ano").classList.toggle("d-none");
+        document.getElementById("mes_ano").value = "";
+        document.getElementById("cumple").classList.toggle("d-none");
+        document.getElementById("cumple").value = "";
+});
+
+    var icons=["Ronnie","Mango","Chester","Beevo"], myicon = "Ronnie";
+    var raza_actual="";
+
+    var currentSlide=1, cantSlides=4;
+    const infoSlides = [["¡Un nuevo miembro de la familia!","Cuéntanos un poco sobre tu mascota"],["¡Muy bien!","Ahora dinos la edad de tu mascota"],["¡Genial!","Estamos por terminar"],["¡Ya casi!",""]]
+
+function iniciar_register_pet()
+{
+    //inicio tradicional
+    var localStorade = window.localStorage;
+    var name = localStorage.getItem('nombre');
+    if(name!=null){
+    document.getElementById('NavUsername').innerHTML = name;
+    document.getElementById('NavUsername').classList.add("text-uppercase");}
+    else{window.location.replace("../index.html");}
+
+    //datos tipos de mascotas
+    let url = "https://script.google.com/macros/s/AKfycbxJr7WjDsNpRdAEAQqBoMlXeiAj6mV6Zhozr0LU34XURDEb9GF3bVhUbJ94CeeqvS2p/exec?u=root&p=menealacola&func=";
+    let consultatipo = "select * from tipos".replaceAll(" ","%20");
+    var request = httpGet(url+consultatipo);
+    if(request[0]=="200"){
+        for (var i = 0; i <= request[1].length-1; i++) {
+            var element = document.createElement("option");
+            element.setAttribute('value',request[1][i][0]);
+            var text = document.createTextNode(request[1][i][1]);
+            element.appendChild(text);
+            document.getElementById('tipo').appendChild(element);
+        }
+    }else{alert('error al conectarse con la base de datos de los tipos de mascotas :c');}
+}
+
+function cargarRazas()
+{
+    if(document.getElementById('tipo').value=='default'){return;}
+    if(document.getElementById('tipo').value=='3'){return;}
+    if(raza_actual!=document.getElementById('tipo').value){
+    raza_actual = document.getElementById('tipo').value;
+    //borrar info anterior
+    document.getElementById("raza").innerHTML = '';
+    //traer info
+    let url = "https://script.google.com/macros/s/AKfycbxJr7WjDsNpRdAEAQqBoMlXeiAj6mV6Zhozr0LU34XURDEb9GF3bVhUbJ94CeeqvS2p/exec?u=root&p=menealacola&func=";
+    let consultaraza = ("select * from razas where tipo="+raza_actual).replaceAll(" ","%20");
+    var request = httpGet(url+consultaraza);
+    if(request[0]=="200"){
+        //alert()
+        for (var i = 0; i <= request[1].length-1; i++) {
+            var element = document.createElement("option");
+            element.setAttribute('value',request[1][i][0]);
+            element.setAttribute('imagen',request[1][i][4]);
+            var text = document.createTextNode(request[1][i][1]);
+            element.appendChild(text);
+            document.getElementById('raza').appendChild(element);
+        }
+    }else{alert('error al conectarse con la base de datos de las razas de mascotas :c'+request[0]);}
+    }
+    document.getElementById('img-pet').classList.remove('d-none');
+    document.getElementById('img-pet').src="";
+}
+
+    function iconfrom(animo) {
+        let src = "https://museortizmedia.github.io/registradog/image/icon/"+myicon;
+        switch (animo) {
+          case 1:
+            src+=".png";
+            break;
+          case 2:
+            src+="_girl.png";
+            break;
+          case 3:
+            src+="_happy.png";
+            break;
+          case 4:
+            src+="_lengua.png";
+            break;
+          case 5:
+            src+="_ok.png";
+            break;
+          default:
+            src+=".png";
+        }
+        return src;
+    }
+
+    function changeIcon(src)
+    {
+        document.getElementById('icon').src = src;
+    }
+    function nextOrBack(isnext, slide)
+    {
+        if (isnext==false&&slide==2) {document.getElementById('btnBack').classList.add('disabled');}
+        //alert(currentSlide);        
+        if(isnext){switch(slide) {  
+            case 1:
+            if(document.getElementById('tipo').value == 'default')
+                {
+                    alert('completa campo tipo'); return;
+                } else if(document.getElementById('tipo').value == '3' && document.getElementById('otro_tipo').value==''){alert('completa campo de especie'); return;}
+                else if(!(document.getElementById('nombre').value!='')){
+                    alert('completa campo nombre'); return;
+                }
+
+                document.getElementById('iconCL').classList.remove('d-none');
+                document.getElementById('iconCR').classList.remove('d-none');
+                document.getElementById('btnBack').classList.remove('disabled');
+
+            break;
+            case 2:
+                var a = document.getElementById('cumple').value;
+                var b = document.getElementById('mes_ano').value;
+                var exprega = /^[0-9]{2}\/[0-9]{2}\/[0-9]{4}/;
+                var expregb = /^[0-9]{2}\/[0-9]{4}/;
+                if( !(exprega.test(a) || expregb.test(b)) )
+                {alert('completa algun campo'); return; }
+            break;
+            case 3:
+            if(document.getElementById('peso').value==""){alert('completa el campo de peso');return;}
+            if(document.getElementById("sexo").value=="default"){alert('selecciona un sexo de tu mascota');return;}
+
+            document.getElementById('btnNext').innerHTML="<b>terminar ></b>"
+            break;
+        }}
+        console.log('inscription__s_'+currentSlide);
+        document.getElementById('inscription__s_'+currentSlide).classList.add('d-none');
+        if(isnext){
+        currentSlide++;
+        if(currentSlide>cantSlides){currentSlide=cantSlides;
+            var id_dueño = httpGet("https://script.google.com/macros/s/AKfycbxJr7WjDsNpRdAEAQqBoMlXeiAj6mV6Zhozr0LU34XURDEb9GF3bVhUbJ94CeeqvS2p/exec?u=root&p=menealacola&func="+("select (id) from duenos where usuario_correo="+window.localStorage.getItem('u_correo')).replaceAll(" ","%20"));
+            if(id_dueño[0]=="200"){id_dueño=id_dueño[1]}else{alert("hubo un problema reconociendo al usuario. Vuelva a iniciar sesión e inténtelo nuevamente");return;}
+            var hoy = new Date();
+            var datos = [
+            hoy.getDate()+"/"+(hoy.getMonth()+1)+"/"+hoy.getFullYear()+"-"+hoy.getHours()+":"+hoy.getMinutes()+":"+hoy.getSeconds(),
+            document.getElementById('nombre').value.replaceAll(" ","-"),
+            document.getElementById('cumple').value,
+            "'01/"+document.getElementById('mes_ano').value,
+            "",
+            document.getElementById('peso').value,
+            document.getElementById('sexo').value,
+            document.getElementById('chip').value.replaceAll(" ","-"),
+            "",
+            myicon,
+            id_dueño,
+            ""];
+            if(document.getElementById('raza').value=="default"){datos[4]=document.getElementById('otro_tipo').value;}else{datos[11]=document.getElementById('raza').value;}
+            var url = "https://script.google.com/macros/s/AKfycbxJr7WjDsNpRdAEAQqBoMlXeiAj6mV6Zhozr0LU34XURDEb9GF3bVhUbJ94CeeqvS2p/exec?u=root&p=menealacola&func=";
+            url+= ("insert mascotas (fecha_inscripcion,nombre,fecha_nacimiento,mes_año,otro_tipo,peso,género,n_chip,placa,icon,id_dueño,raza) values ("+datos.toString()+")").replaceAll(" ","%20");
+            var insertM = httpGet(url);
+            if(insertM[0]=="200"){
+                document.getElementById('finish').classList.remove('d-none');
+                document.getElementById('inscription').classList.add('d-none');
+                document.getElementById('finish__icon').src = iconfrom(4);
+                changeFavicon(document.getElementById('finish__icon').src);
+                window.localStorage.removeItem('mascotas');
+            }else{
+                alert('problem para insertar mascota a la bd');
+            }
+        }
+        }else{
+        currentSlide--;
+        if(currentSlide<1){currentSlide=1;}
+        }
+        console.log('inscription__s_'+currentSlide);
+        document.getElementById('inscription__title').innerHTML=infoSlides[currentSlide-1][0];
+        document.getElementById('inscription__text').innerHTML=infoSlides[currentSlide-1][1];
+        document.getElementById('inscription__s_'+currentSlide).classList.remove('d-none');
+    }
+
+function cambiarAvatar(boo)
+{
+    var index = icons.indexOf(myicon);
+    if(boo){
+    index++;
+    if(index>3){index=0;}
+    }else{
+    index--;
+    if(index<0){index=icons.length-1;}
+    }
+
+    myicon=icons[index];
+    changeIcon(iconfrom(1));
+
+    document.getElementById('icon_name').innerHTML=myicon;
+    }
+
+function httpGet(theUrl)
+{
+    var xmlHttp = new XMLHttpRequest();
+    xmlHttp.open( "GET", theUrl, false );
+    xmlHttp.send( null );
+    var respuesta=xmlHttp.response;
+    const res = JSON.parse(respuesta.toString());
+    return res;
+}
+function changeFavicon(src)
+    {
+         var link = document.createElement('link'),
+             oldLink = document.getElementById('dynamic-favicon');
+         link.id = 'dynamic-favicon';
+         link.rel = 'shortcut icon';
+         link.href = src;
+         if (oldLink) {
+          document.head.removeChild(oldLink);
+         }
+         document.head.appendChild(link);
+    }
+</script>
+</body>
+</html>
